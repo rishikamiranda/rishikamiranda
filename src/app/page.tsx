@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import Hero from '@/components/Hero';
-import { journalEntries, lists, heroImages } from '@/lib/dummy-data';
+import { lists, heroImages } from '@/lib/dummy-data';
+import { getAllJournalEntries, categoryDisplayNames } from '@/lib/content/journal-entries';
 
-export default function HomePage() {
+export const revalidate = 3600;
+
+export default async function HomePage() {
+  const allEntries = await getAllJournalEntries();
+  const journalEntries = allEntries.slice(0, 5);
   return (
     <>
       {/* Hero Section */}
@@ -123,36 +128,60 @@ export default function HomePage() {
           <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">Journal</span>
         </div>
         <div className="space-y-4">
-          {journalEntries.map((entry) => (
-            <Link
-              key={entry.slug}
-              href={`/journal/${entry.slug}`}
-              className="group relative block w-full transition-all duration-300"
-            >
-              {/* Background image – hidden by default, appears on hover */}
-              <div
-                className="absolute inset-0 z-0 bg-cover bg-center opacity-0 group-hover:opacity-10 transition-opacity duration-700 grayscale"
-                style={{ backgroundImage: `url('${entry.heroImage}')` }}
-              />
+          {journalEntries.map((entry) => {
+            // Get the first image from images array or use a placeholder
+            const heroImage = entry.images?.[0] || '';
+            const displayCategories = entry.categories || [];
 
-              {/* Content – stays on top */}
-              <div className="relative z-10 border-b border-[#eaeaea] py-5 px-4 group-hover:border-[#d0d0d0] transition-colors duration-300">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                  <div className="flex-1">
-                    <span className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light">
-                      {entry.date}
-                    </span>
-                    <h2 className="text-lg md:text-xl font-light text-[#1a1a1a] group-hover:text-[#6b6b6b] transition-colors duration-300 mt-1">
-                      {entry.title}
-                    </h2>
+            return (
+              <Link
+                key={entry.id}
+                href={`/journal/${entry.slug}`}
+                className="group relative block w-full transition-all duration-300"
+              >
+                {/* Background image – hidden by default, appears on hover */}
+                {heroImage && (
+                  <div
+                    className="absolute inset-0 z-0 bg-cover bg-center opacity-0 group-hover:opacity-10 transition-opacity duration-700 grayscale"
+                    style={{ backgroundImage: `url('${heroImage}')` }}
+                  />
+                )}
+
+                {/* Content – stays on top */}
+                <div className="relative z-10 border-b border-[#eaeaea] py-5 px-4 group-hover:border-[#d0d0d0] transition-colors duration-300">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                    <div className="flex-1">
+                      <span className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light">
+                        {new Date(entry.created_at || '').toLocaleDateString('en-US', {
+                          month: 'long',
+                          day: 'numeric',
+                          year: 'numeric',
+                        })}
+                      </span>
+                      <h2 className="text-lg md:text-xl font-light text-[#1a1a1a] group-hover:text-[#6b6b6b] transition-colors duration-300 mt-1">
+                        {entry.title}
+                      </h2>
+                      {entry.description && (
+                        <p className="text-sm text-[#6b6b6b] font-light mt-1 line-clamp-2">
+                          {entry.description}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {displayCategories.map((cat) => (
+                        <span
+                          key={cat}
+                          className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light border border-[#e0e0e0] px-2 py-0.5 rounded"
+                        >
+                          {categoryDisplayNames[cat] || cat}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <span className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light whitespace-nowrap">
-                    {entry.category}
-                  </span>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
         <div className="text-left mt-8">
           <Link
