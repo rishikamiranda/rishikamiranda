@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { HamburgerMenuIcon } from '../icons/arcticons-hamburger-menu';
+import { CloseIcon } from '../icons/ei-close';
+
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +43,7 @@ export default function Header() {
             className="md:hidden text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors"
             aria-label="Toggle menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <CloseIcon size={24} /> : <HamburgerMenuIcon size={24} />}
           </button>
         </div>
       </div>
