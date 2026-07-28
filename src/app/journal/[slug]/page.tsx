@@ -7,10 +7,7 @@ import {
 } from '@/lib/content/journal-entries';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
 
-// Revalidate every 3600 seconds (1 hour)
-export const revalidate = 3600;
-
-// Generate static paths at build time
+// Generate all static paths at build time
 export async function generateStaticParams() {
   const slugs = await getJournalSlugs();
   return slugs.map(({ slug }) => ({
@@ -18,6 +15,7 @@ export async function generateStaticParams() {
   }));
 }
 
+// This page is statically generated at build time
 export default async function JournalDetailPage({
   params,
 }: {

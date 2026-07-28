@@ -6,17 +6,15 @@ import { Database } from "@/types/supabase";
 export type JournalEntry = Database['public']['Tables']['journal_entries']['Row'];
 export type JournalCategory = Database['public']['Enums']['journal_category'];
 
-// Helper to get display name for categories
 export const categoryDisplayNames: Record<JournalCategory, string> = {
   reflections: 'Reflections',
   projects: 'Projects',
   resources: 'Resources',
 };
 
+export const ALL_CATEGORIES: JournalCategory[] = ['reflections', 'projects', 'resources'];
 
-// ---------- STATIC GENERATION HELPERS ----------
-
-// Get all entries (for static generation)
+// Get all entries for static generation
 export async function getAllJournalEntries(): Promise<JournalEntry[]> {
   try {
     const supabase = await createClient();
@@ -38,32 +36,28 @@ export async function getAllJournalEntries(): Promise<JournalEntry[]> {
   }
 }
 
-
-// Helper to get all available categories from the enum
-export const ALL_CATEGORIES: JournalCategory[] = ['reflections', 'projects', 'resources'];
-
-// Journal-specific functions
-export async function getJournalEntries(): Promise<JournalEntry[]> {
+// Get all slugs for static generation
+export async function getJournalSlugs(): Promise<{ slug: string }[]> {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
       .from('journal_entries')
-      .select('*')
-      .eq('published', true)
-      .order('created_at', { ascending: false });
+      .select('slug')
+      .eq('published', true);
 
     if (error) {
-      console.error('Error fetching journal entries:', error);
+      console.error('Error fetching journal slugs:', error);
       return [];
     }
 
     return data || [];
   } catch (error) {
-    console.error('Unexpected error fetching journal entries:', error);
+    console.error('Unexpected error fetching journal slugs:', error);
     return [];
   }
 }
 
+// Get a single entry by slug
 export async function getJournalEntryBySlug(slug: string): Promise<JournalEntry | null> {
   try {
     const supabase = await createClient();
@@ -86,6 +80,7 @@ export async function getJournalEntryBySlug(slug: string): Promise<JournalEntry 
   }
 }
 
+// Get entries by category
 export async function getJournalEntriesByCategory(category: JournalCategory): Promise<JournalEntry[]> {
   try {
     const supabase = await createClient();
@@ -104,27 +99,6 @@ export async function getJournalEntriesByCategory(category: JournalCategory): Pr
     return data || [];
   } catch (error) {
     console.error('Unexpected error fetching journal entries:', error);
-    return [];
-  }
-}
-
-// Get all slugs for static generation
-export async function getJournalSlugs(): Promise<{ slug: string }[]> {
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from('journal_entries')
-      .select('slug')
-      .eq('published', true);
-
-    if (error) {
-      console.error('Error fetching journal slugs:', error);
-      return [];
-    }
-
-    return data || [];
-  } catch (error) {
-    console.error('Unexpected error fetching journal slugs:', error);
     return [];
   }
 }

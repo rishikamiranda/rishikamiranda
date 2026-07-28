@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import { getAllJournalEntries, categoryDisplayNames } from '@/lib/content/journal-entries';
 
-// Revalidate every 3600 seconds (1 hour) – content will update automatically
-export const revalidate = 3600;
-
+// This page is statically generated at build time
 export default async function JournalIndexPage() {
   const entries = await getAllJournalEntries();
 
