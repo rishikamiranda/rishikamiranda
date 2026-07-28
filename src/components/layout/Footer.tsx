@@ -1,6 +1,4 @@
-import { WebSolidIcon } from '@/components/icons/streamline-web-solid';
-import { InstagramFilledIcon } from '@/components/icons/ant-design-instagram-filled';
-import { LinkedinFilledIcon } from '@/components/icons/ant-design-linkedin-filled';
+import { WebsiteIcon, LinkedinIcon, InstagramIcon } from '@/components/icons';
 
 export default function Footer() {
   return (
@@ -16,7 +14,7 @@ export default function Footer() {
           className="text-[#6b5f58] hover:text-[#1a1a1a] transition-colors"
           aria-label="Website"
         >
-          <WebSolidIcon size={16} color="currentColor" strokeWidth={1.5} />
+          <WebsiteIcon size={16} />
         </a>
         <a
           href="https://www.linkedin.com/in/rishika-miranda-163260329/"
@@ -25,7 +23,7 @@ export default function Footer() {
           className="text-[#6b5f58] hover:text-[#1a1a1a] transition-colors"
           aria-label="LinkedIn"
         >
-          <LinkedinFilledIcon size={16} color="currentColor" strokeWidth={1.5} />
+          <LinkedinIcon size={16} />
         </a>
         <a
           href="https://www.instagram.com/rishikamiranda/"
@@ -34,7 +32,7 @@ export default function Footer() {
           className="text-[#6b5f58] hover:text-[#1a1a1a] transition-colors"
           aria-label="Instagram"
         >
-          <InstagramFilledIcon size={16} color="currentColor" strokeWidth={1.5} />
+          <InstagramIcon size={16} />
         </a>
       </div>
     </footer>

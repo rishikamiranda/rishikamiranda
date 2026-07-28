@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { WebSolidIcon } from '@/components/icons/streamline-web-solid';
-import { InstagramFilledIcon } from '@/components/icons/ant-design-instagram-filled';
-import { LinkedinFilledIcon } from '@/components/icons/ant-design-linkedin-filled';
+import { WebsiteIcon, LinkedinIcon, InstagramIcon } from '@/components/icons';
 
 interface HeroProps {
   images: string[];
@@ -67,7 +65,7 @@ export default function Hero({ images, title, subtitle }: HeroProps) {
                 className="text-white/60 hover:text-white transition-colors"
                 aria-label="Website"
               >
-                <WebSolidIcon size={18} color="currentColor" strokeWidth={1.5} />
+                <WebsiteIcon size={20} color="currentColor" />
               </a>
               <a
                 href="https://www.linkedin.com/in/rishika-miranda-163260329/"
@@ -76,7 +74,7 @@ export default function Hero({ images, title, subtitle }: HeroProps) {
                 className="text-white/60 hover:text-white transition-colors"
                 aria-label="LinkedIn"
               >
-                <LinkedinFilledIcon size={18} color="currentColor" strokeWidth={1.5} />
+                <LinkedinIcon size={20} color="currentColor" />
               </a>
               <a
                 href="https://www.instagram.com/rishikamiranda/"
@@ -85,7 +83,7 @@ export default function Hero({ images, title, subtitle }: HeroProps) {
                 className="text-white/60 hover:text-white transition-colors"
                 aria-label="Instagram"
               >
-                <InstagramFilledIcon size={18} color="currentColor" strokeWidth={1.5} />
+                <InstagramIcon size={20} color="currentColor" />
               </a>
             </div>
           </div>
