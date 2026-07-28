@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { Globe, Linkedin, Instagram } from 'lucide-react';
-
+import { WebBoxIcon } from '../icons/mdi-web-box';
+import { LinkedinFilledIcon } from '../icons/ant-design-linkedin-filled';
+import { InstagramFilledIcon } from '../icons/ant-design-instagram-filled';
 export default function Footer() {
   return (
     <footer className="border-t border-[#e0e0e0] py-8 px-4 mt-auto">
@@ -17,7 +18,7 @@ export default function Footer() {
             className="text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
             aria-label="Website"
           >
-            <Globe size={18} />
+            <WebBoxIcon size={18} />
           </Link>
           <Link
             href="https://www.linkedin.com/in/rishika-miranda-163260329/"
@@ -26,7 +27,7 @@ export default function Footer() {
             className="text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
             aria-label="LinkedIn"
           >
-            <Linkedin size={18} />
+            <LinkedinFilledIcon size={18} />
           </Link>
           <Link
             href="https://www.instagram.com/rishikamiranda/"
@@ -35,7 +36,7 @@ export default function Footer() {
             className="text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
             aria-label="Instagram"
           >
-            <Instagram size={18} />
+            <InstagramFilledIcon size={18} />
           </Link>
         </div>
       </div>
