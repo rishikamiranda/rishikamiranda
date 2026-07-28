@@ -1,46 +1,28 @@
 import Link from 'next/link';
-import { journalEntries, lists } from '@/lib/dummy-data';
+import Hero from '@/components/Hero';
+import { journalEntries, lists, heroImages } from '@/lib/dummy-data';
 
 export default function HomePage() {
-  const recentJournal = journalEntries.slice(0, 3);
-  const recentLists = lists.slice(0, 3);
-
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16">
+    <>
       {/* Hero Section */}
-      <section className="mb-16">
-        <p className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b] mb-4">est. 2020 – 2026</p>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-[#1a1a1a] leading-[1.1] tracking-tight">
-          Making sense of the<br />
-          <span className="font-medium">world through design</span>
-        </h1>
-        <p className="text-sm md:text-base text-[#4a4a4a] max-w-xl leading-relaxed mt-6 font-light">
-          Through buildings, objects, travel, art, craftsmanship and culture, I&apos;m constantly collecting ideas about how people live, gather and create meaning. This is where I document them.
-        </p>
-        <div className="flex flex-wrap gap-6 mt-8">
-          <Link
-            href="/journal"
-            className="text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
-          >
-            Featured Stories →
-          </Link>
-          <Link
-            href="/about"
-            className="text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors"
-          >
-            About | Inquire
-          </Link>
-        </div>
-      </section>
+      <Hero
+        images={heroImages}
+        title='Making sense of the world through design'
+        subtitle="Through buildings, objects, travel, art, craftsmanship and culture, I'm constantly collecting ideas about how people live, gather and create meaning. This is where I document them."
+      />
 
-      <hr className="border-[#e0e0e0] mb-12" />
+      {/* DIVIDER */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 w-full">
+        <hr className="border-[#e0e0e0]" />
+      </div>
 
-      {/* About Section */}
-      <section className="mb-16">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
-          {/* Portrait */}
-          <div className="md:w-[35%] flex justify-center md:justify-start">
-            <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-[#e0e0e0] flex-shrink-0">
+      {/* ABOUT SECTION */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
+          {/* LEFT: Circular Portrait */}
+          <div className="md:w-[40%] flex justify-center md:justify-start">
+            <div className="w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-[#e0e0e0] flex-shrink-0">
               <img
                 src="/images/rishika-portrait.jpg"
                 alt="Rishika Miranda"
@@ -49,15 +31,15 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* About Text */}
-          <div className="md:w-[65%]">
-            <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">About</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#1a1a1a] leading-tight mt-2 mb-4">
+          {/* RIGHT: Text Content */}
+          <div className="md:w-[60%] flex flex-col">
+            <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b] mb-4">About</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#1a1a1a] leading-tight mb-6">
               Hi, I am Rishika
             </h2>
-            <div className="space-y-4 text-sm md:text-base text-[#3a3a3a] leading-relaxed font-light">
+            <div className="space-y-4 text-[15px] text-[#3a3a3a] leading-relaxed font-light">
               <p>
-                I&apos;m a Bangalore-based architect and creative lead working across architecture, interiors, storytelling and experiential design. Architecture is how I make sense of the world.
+                I'm a Bangalore-based architect and creative lead working across architecture, interiors, storytelling and experiential design. Architecture is how I make sense of the world.
               </p>
               <p>
                 Over the years, that has led me far beyond buildings. Into interiors, furniture, travel, art, craft, culture and the many ways people shape the spaces around them. Much of my work takes shape through Kyrah Design Studio, while other interests find their way into writing, events, collaborations and the occasional side project. This website is a collection of projects, places and ideas that continue to inform how I think, design and create.
@@ -75,44 +57,104 @@ export default function HomePage() {
         </div>
       </section>
 
-      <hr className="border-[#e0e0e0] mb-12" />
+      {/* DIVIDER */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 w-full">
+        <hr className="border-[#e0e0e0]" />
+      </div>
 
-      {/* What I Do Section */}
-      <section className="mb-16">
-        <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">What I do</span>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
-          {[
-            {
-              id: '01',
-              title: 'Architecture & Interiors',
-              description: 'Comprehensive architectural and interior frameworks developed from deep site context, artisanal heritage, and spatial clarity.',
-            },
-            {
-              id: '02',
-              title: 'Furniture & Product Design',
-              description: 'Intuitively crafted physical items engineered to complement the physical behaviors, textures, and daily spatial rituals of the end user.',
-            },
-            {
-              id: '03',
-              title: 'Experience Curation',
-              description: 'Designing premium, cross-disciplinary events that weave together layout design, material culture, food, music, and raw community conversations.',
-            },
-          ].map((item) => (
-            <div key={item.id} className="border-t border-[#e0e0e0] pt-4">
-              <span className="text-[10px] tracking-[0.2em] text-[#6b6b6b] font-medium">{item.id}</span>
-              <h3 className="text-xl font-light text-[#1a1a1a] mt-2 mb-3">{item.title}</h3>
-              <p className="text-sm text-[#4a4a4a] leading-relaxed font-light">{item.description}</p>
+      {/* WHAT I DO SECTION */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
+        <div className="mb-12">
+          <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">What I do</span>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          {/* 01. Architecture & Interiors */}
+          <div className="border-t border-[#e0e0e0] pt-6">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-[10px] tracking-[0.2em] text-[#6b6b6b] font-medium">01</span>
             </div>
-          ))}
+            <h3 className="text-xl font-light text-[#1a1a1a] mb-3 tracking-wide">Architecture &amp; Interiors</h3>
+            <p className="text-[14px] text-[#4a4a4a] leading-relaxed font-light">
+              Comprehensive architectural and interior frameworks developed from deep site context, artisanal heritage, and spatial clarity.
+            </p>
+            <button>
+              Enquire about this →
+            </button>
+          </div>
+
+          {/* 02. Furniture & Product Design */}
+          <div className="border-t border-[#e0e0e0] pt-6">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-[10px] tracking-[0.2em] text-[#6b6b6b] font-medium">02</span>
+            </div>
+            <h3 className="text-xl font-light text-[#1a1a1a] mb-3 tracking-wide">Furniture &amp; Product Design</h3>
+            <p className="text-[14px] text-[#4a4a4a] leading-relaxed font-light">
+              Intuitively crafted physical items engineered to complement the physical behaviors, textures, and daily spatial rituals of the end user.
+            </p>
+            <button>
+              Enquire about this →
+            </button>
+          </div>
+
+          {/* 03. Experience Curation */}
+          <div className="border-t border-[#e0e0e0] pt-6">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-[10px] tracking-[0.2em] text-[#6b6b6b] font-medium">03</span>
+            </div>
+            <h3 className="text-xl font-light text-[#1a1a1a] mb-3 tracking-wide">Experience Curation</h3>
+            <p className="text-[14px] text-[#4a4a4a] leading-relaxed font-light">
+              Designing premium, cross-disciplinary events that weave together layout design, material culture, food, music, and raw community conversations.
+            </p>
+            <button>
+              Enquire about this →
+            </button>
+          </div>
         </div>
       </section>
 
-      <hr className="border-[#e0e0e0] mb-12" />
+      {/* DIVIDER */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 w-full">
+        <hr className="border-[#e0e0e0]" />
+      </div>
 
-      {/* Journal Section */}
-      <section className="mb-16">
-        <div className="flex justify-between items-center mb-6">
+      {/* JOURNAL SECTION */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
+        <div className="flex items-end justify-between mb-10">
           <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">Journal</span>
+        </div>
+        <div className="space-y-4">
+          {journalEntries.map((entry) => (
+            <Link
+              key={entry.slug}
+              href={`/journal/${entry.slug}`}
+              className="group relative block w-full transition-all duration-300"
+            >
+              {/* Background image – hidden by default, appears on hover */}
+              <div
+                className="absolute inset-0 z-0 bg-cover bg-center opacity-0 group-hover:opacity-10 transition-opacity duration-700 grayscale"
+                style={{ backgroundImage: `url('${entry.heroImage}')` }}
+              />
+
+              {/* Content – stays on top */}
+              <div className="relative z-10 border-b border-[#eaeaea] py-5 px-4 group-hover:border-[#d0d0d0] transition-colors duration-300">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                  <div className="flex-1">
+                    <span className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light">
+                      {entry.date}
+                    </span>
+                    <h2 className="text-lg md:text-xl font-light text-[#1a1a1a] group-hover:text-[#6b6b6b] transition-colors duration-300 mt-1">
+                      {entry.title}
+                    </h2>
+                  </div>
+                  <span className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light whitespace-nowrap">
+                    {entry.category}
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="text-left mt-8">
           <Link
             href="/journal"
             className="text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
@@ -120,31 +162,16 @@ export default function HomePage() {
             All Entries →
           </Link>
         </div>
-        <div className="space-y-4">
-          {recentJournal.map((entry) => (
-            <Link
-              key={entry.id}
-              href={`/journal/${entry.slug}`}
-              className="group block border-b border-[#eaeaea] py-3 hover:border-[#d0d0d0] transition-colors"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                <span className="text-base md:text-lg font-light text-[#1a1a1a] group-hover:text-[#6b6b6b] transition-colors">
-                  {entry.title}
-                </span>
-                <span className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light">
-                  {entry.categories}
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
       </section>
 
-      <hr className="border-[#e0e0e0] mb-12" />
+      {/* DIVIDER */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 w-full">
+        <hr className="border-[#e0e0e0]" />
+      </div>
 
-      {/* Lists Section */}
-      <section className="mb-16">
-        <div className="flex justify-between items-center mb-6">
+      {/* LISTS SECTION – Gallery Grid */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
+        <div className="flex items-end justify-between mb-10">
           <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">Lists</span>
           <Link
             href="/lists"
@@ -153,28 +180,30 @@ export default function HomePage() {
             All Lists →
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {recentLists.map((list) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {lists.map((list) => (
             <Link
-              key={list.id}
-              href={`/lists/${list.category}/${list.slug}`}
-              className="group block"
+              key={list.slug}
+              href={`/lists/${list.category.toLowerCase()}/${list.slug}`}
+              className="group block transition-all duration-300"
             >
-              <div className="aspect-[4/3] bg-[#f5f5f5] overflow-hidden">
+              <div className="overflow-hidden bg-[#f5f5f5] aspect-[4/3]">
                 <img
                   src={list.image}
                   alt={list.title}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
                 />
               </div>
-              <div className="mt-3 flex justify-between items-start gap-2">
+              <div className="mt-4 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
                 <div>
-                  <h3 className="text-base md:text-lg font-light text-[#1a1a1a] group-hover:text-[#6b6b6b] transition-colors">
+                  <h3 className="text-lg font-light text-[#1a1a1a] group-hover:text-[#6b6b6b] transition-colors duration-300 tracking-wide">
                     {list.title}
                   </h3>
-                  <p className="text-sm text-[#6b6b6b] font-light">{list.content}</p>
+                  <p className="text-sm text-[#6b6b6b] font-light leading-relaxed mt-1 line-clamp-2">
+                    {list.description}
+                  </p>
                 </div>
-                <span className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light whitespace-nowrap mt-1">
+                <span className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light whitespace-nowrap mt-1 sm:mt-0.5">
                   {list.category}
                 </span>
               </div>
@@ -182,6 +211,47 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-    </div>
+
+      {/* CONTACT DIALOG */}
+      <dialog
+        id="contactDialog"
+        className="rounded-none border border-[#d0d0d0] shadow-2xl p-10 max-w-md w-full backdrop:bg-black/30 open:flex open:flex-col open:gap-6 bg-white"
+      >
+        <form method="dialog" className="flex flex-col gap-6">
+          <div>
+            <h3 className="text-2xl font-light text-[#1a1a1a] tracking-wide">Let's collaborate</h3>
+            <p className="text-sm text-[#4a4a4a] font-light mt-1">Tell me about your project or idea.</p>
+          </div>
+          <div className="space-y-4">
+            <input
+              type="text"
+              placeholder="Your name"
+              className="w-full border-b border-[#d0d0d0] bg-transparent py-2 text-sm focus:outline-none focus:border-[#1a1a1a] transition-colors placeholder:text-[#a0a0a0] font-light"
+            />
+            <input
+              type="email"
+              placeholder="Your email"
+              className="w-full border-b border-[#d0d0d0] bg-transparent py-2 text-sm focus:outline-none focus:border-[#1a1a1a] transition-colors placeholder:text-[#a0a0a0] font-light"
+            />
+            <textarea
+              rows={3}
+              placeholder="Brief description..."
+              className="w-full border-b border-[#d0d0d0] bg-transparent py-2 text-sm focus:outline-none focus:border-[#1a1a1a] transition-colors placeholder:text-[#a0a0a0] font-light resize-none"
+            />
+          </div>
+          <div className="flex justify-end gap-4 mt-2">
+            <button>
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="text-[10px] tracking-[0.2em] uppercase text-white bg-[#1a1a1a] px-6 py-2 hover:bg-[#3a3a3a] transition-colors font-light"
+            >
+              Send Message
+            </button>
+          </div>
+        </form>
+      </dialog>
+    </>
   );
 }

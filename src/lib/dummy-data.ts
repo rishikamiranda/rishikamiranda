@@ -1,147 +1,84 @@
 export const journalEntries = [
   {
-    id: '1',
     slug: 'finding-stillness',
     title: 'Finding Stillness in a Busy World',
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-## A Reflection
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-> "True luxury is found in absolute reduction."
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
-    categories: 'reflections',
-    published: true,
-    created_at: '2025-01-15T10:00:00Z',
-    images: ['/images/journal/1.jpg'],
+    date: 'May 28, 2026',
+    category: 'Reflections',
+    heroImage: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&q=80',
   },
   {
-    id: '2',
     slug: 'designing-for-senses',
     title: 'Designing for the Senses',
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-## Sensory Architecture
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
-    categories: 'library',
-    published: true,
-    created_at: '2025-01-10T10:00:00Z',
-    images: ['/images/journal/2.jpg'],
+    date: 'May 25, 2026',
+    category: 'Design Philosophy',
+    heroImage: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
   },
   {
-    id: '3',
     slug: 'the-art-of-curation',
     title: 'The Art of Curation',
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    categories: 'reflections',
-    published: true,
-    created_at: '2025-01-05T10:00:00Z',
-    images: ['/images/journal/3.jpg'],
+    date: 'May 20, 2026',
+    category: 'Curation',
+    heroImage: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80',
   },
   {
-    id: '4',
     slug: 'craftsmanship-in-modern-design',
     title: 'Craftsmanship in Modern Design',
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    categories: 'library',
-    published: true,
-    created_at: '2025-01-01T10:00:00Z',
-    images: ['/images/journal/4.jpg'],
+    date: 'May 15, 2026',
+    category: 'Craftsmanship',
+    heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
   },
   {
-    id: '5',
     slug: 'architecture-and-memory',
     title: 'Architecture and Memory',
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    categories: 'reflections',
-    published: true,
-    created_at: '2024-12-28T10:00:00Z',
-    images: ['/images/journal/5.jpg'],
+    date: 'May 10, 2026',
+    category: 'Architectural Philosophy',
+    heroImage: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80',
   },
   {
-    id: '6',
     slug: 'the-poetry-of-light',
     title: 'The Poetry of Light',
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-    categories: 'library',
-    published: true,
-    created_at: '2024-12-20T10:00:00Z',
-    images: ['/images/journal/6.jpg'],
+    date: 'May 5, 2026',
+    category: 'Lighting Design',
+    heroImage: 'https://images.unsplash.com/photo-1507207611507-ec7a8e113c38?w=800&q=80',
   },
 ];
 
+// Hero slideshow images
+export const heroImages = [
+  'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=1600&q=80',
+  'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600&q=80',
+  'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&q=80',
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80',
+];
+
+// Dummy lists data
 export const lists = [
   {
-    id: '1',
     slug: 'mid-century-modern',
     title: 'Mid‑Century Modern',
-    content: 'Iconic furniture and architectural details from the mid-20th century.',
-    category: 'interiors',
-    published: true,
-    created_at: '2025-01-20T08:00:00Z',
-    image: '/images/lists/mid-century.jpg',
+    category: 'Interiors',
+    description: 'Iconic furniture and architectural details from the mid-20th century.',
+    image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&q=80',
   },
   {
-    id: '2',
     slug: 'scandinavian-light',
     title: 'Scandinavian Light',
-    content: 'Exploring the role of natural light in Nordic interior design.',
-    category: 'interiors',
-    published: true,
-    created_at: '2025-01-18T08:00:00Z',
-    image: '/images/lists/scandinavian.jpg',
+    category: 'Interiors',
+    description: 'Exploring the role of natural light in Nordic interior design.',
+    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80',
   },
   {
-    id: '3',
     slug: 'artisan-objects',
     title: 'Artisan Objects',
-    content: 'Handcrafted objects that bridge traditional techniques and modern aesthetics.',
-    category: 'design',
-    published: true,
-    created_at: '2025-01-15T08:00:00Z',
-    image: '/images/lists/artisan.jpg',
+    category: 'Design',
+    description: 'Handcrafted objects that bridge traditional techniques and modern aesthetics.',
+    image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&q=80',
   },
   {
-    id: '4',
     slug: 'brutalist-forms',
     title: 'Brutalist Forms',
-    content: 'The raw, sculptural beauty of brutalist architecture in urban landscapes.',
-    category: 'architecture',
-    published: true,
-    created_at: '2025-01-10T08:00:00Z',
-    image: '/images/lists/brutalist.jpg',
-  },
-];
-
-export const listItems = [
-  {
-    id: 'item1',
-    list_id: '1',
-    image_url: '/images/items/chair.jpg',
-    image_description: 'Eames Lounge Chair',
-    view_url: '#',
-    buy_url: '#',
-    price: 5995,
-  },
-  {
-    id: 'item2',
-    list_id: '1',
-    image_url: '/images/items/table.jpg',
-    image_description: 'Nelson Platform Bench',
-    view_url: '#',
-    buy_url: '#',
-    price: 2500,
-  },
-  {
-    id: 'item3',
-    list_id: '2',
-    image_url: '/images/items/lamp.jpg',
-    image_description: 'PH Lamp',
-    view_url: '#',
-    buy_url: '#',
-    price: 1800,
+    category: 'Architecture',
+    description: 'The raw, sculptural beauty of brutalist architecture in urban landscapes.',
+    image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80',
   },
 ];
