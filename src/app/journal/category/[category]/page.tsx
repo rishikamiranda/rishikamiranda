@@ -8,8 +8,7 @@ import {
   type JournalCategory 
 } from '@/lib/content/journal-entries';
 
-export const revalidate = 3600;
-
+// Generate all category paths at build time
 export async function generateStaticParams() {
   const categories = await getAvailableCategories();
   return categories.map((category) => ({

@@ -3,7 +3,6 @@ import Hero from '@/components/Hero';
 import { lists, heroImages } from '@/lib/dummy-data';
 import { getAllJournalEntries, categoryDisplayNames } from '@/lib/content/journal-entries';
 
-export const revalidate = 3600;
 
 export default async function HomePage() {
   const allEntries = await getAllJournalEntries();
