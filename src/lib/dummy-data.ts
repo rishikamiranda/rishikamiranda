@@ -1,5 +1,6 @@
 export const journalEntries = [
   {
+    id: '1',
     slug: 'finding-stillness',
     title: 'Finding Stillness in a Busy World',
     date: 'May 28, 2026',
@@ -7,6 +8,7 @@ export const journalEntries = [
     heroImage: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&q=80',
   },
   {
+    id: '2',
     slug: 'designing-for-senses',
     title: 'Designing for the Senses',
     date: 'May 25, 2026',
@@ -14,6 +16,7 @@ export const journalEntries = [
     heroImage: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
   },
   {
+    id: '3',
     slug: 'the-art-of-curation',
     title: 'The Art of Curation',
     date: 'May 20, 2026',
@@ -21,6 +24,7 @@ export const journalEntries = [
     heroImage: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&q=80',
   },
   {
+    id: '4',
     slug: 'craftsmanship-in-modern-design',
     title: 'Craftsmanship in Modern Design',
     date: 'May 15, 2026',
@@ -28,6 +32,7 @@ export const journalEntries = [
     heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
   },
   {
+    id: '5',
     slug: 'architecture-and-memory',
     title: 'Architecture and Memory',
     date: 'May 10, 2026',
@@ -35,6 +40,7 @@ export const journalEntries = [
     heroImage: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80',
   },
   {
+    id: '6',
     slug: 'the-poetry-of-light',
     title: 'The Poetry of Light',
     date: 'May 5, 2026',
@@ -54,31 +60,106 @@ export const heroImages = [
 // Dummy lists data
 export const lists = [
   {
+    id: '1',
     slug: 'mid-century-modern',
     title: 'Mid‑Century Modern',
     category: 'Interiors',
     description: 'Iconic furniture and architectural details from the mid-20th century.',
+    content: 'Iconic furniture and architectural details from the mid-20th century.',
     image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&q=80',
   },
   {
+    id: '2',
     slug: 'scandinavian-light',
     title: 'Scandinavian Light',
     category: 'Interiors',
     description: 'Exploring the role of natural light in Nordic interior design.',
+    content: 'Exploring the role of natural light in Nordic interior design.',
     image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80',
   },
   {
+    id: '3',
     slug: 'artisan-objects',
     title: 'Artisan Objects',
     category: 'Design',
     description: 'Handcrafted objects that bridge traditional techniques and modern aesthetics.',
+    content: 'Handcrafted objects that bridge traditional techniques and modern aesthetics.',
     image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&q=80',
   },
   {
+    id: '4',
     slug: 'brutalist-forms',
     title: 'Brutalist Forms',
     category: 'Architecture',
     description: 'The raw, sculptural beauty of brutalist architecture in urban landscapes.',
+    content: 'The raw, sculptural beauty of brutalist architecture in urban landscapes.',
     image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80',
+  },
+];
+
+// Dummy list items data
+export const listItems = [
+  {
+    id: 'item1',
+    list_id: '1',
+    image_url: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&q=80',
+    image_description: 'Eames Lounge Chair',
+    view_url: '#',
+    buy_url: '#',
+    price: 5995,
+  },
+  {
+    id: 'item2',
+    list_id: '1',
+    image_url: 'https://images.unsplash.com/photo-1533317945821-3e59e4d0a6fb?w=400&q=80',
+    image_description: 'Nelson Platform Bench',
+    view_url: '#',
+    buy_url: '#',
+    price: 2500,
+  },
+  {
+    id: 'item3',
+    list_id: '1',
+    image_url: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80',
+    image_description: 'Eames Molded Plastic Chair',
+    view_url: '#',
+    buy_url: '#',
+    price: 495,
+  },
+  {
+    id: 'item4',
+    list_id: '2',
+    image_url: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&q=80',
+    image_description: 'PH Artichoke Lamp',
+    view_url: '#',
+    buy_url: '#',
+    price: 1800,
+  },
+  {
+    id: 'item5',
+    list_id: '2',
+    image_url: 'https://images.unsplash.com/photo-1534376168092-77fad1043054?w=400&q=80',
+    image_description: 'Finn Juhl Sofa',
+    view_url: '#',
+    buy_url: '#',
+    price: 12000,
+  },
+  {
+    id: 'item6',
+    list_id: '3',
+    image_url: 'https://images.unsplash.com/photo-1558618666-fcd25c85f84b?w=400&q=80',
+    image_description: 'Handcrafted Ceramic Vase',
+    view_url: '#',
+    buy_url: '#',
+    price: 350,
+  },
+  {
+    id: 'item7',
+    list_id: '4',
+    image_url: 'https://images.unsplash.com/photo-1577411067465-1fccf72aa756?w=400&q=80',
+    image_description: 'Brutalist Concrete Table',
+    view_url: '#',
+    buy_url: '#',
+    price: 3200,
   },
 ];
