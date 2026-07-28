@@ -4,13 +4,20 @@ import { lists, listItems } from '@/lib/dummy-data';
 
 export async function generateStaticParams() {
   return lists.map((list) => ({
-    category: list.category,
+    category: list.category.toLowerCase(),
     slug: list.slug,
   }));
 }
 
-export default function ListDetailPage({ params }: { params: { category: string; slug: string } }) {
-  const list = lists.find((l) => l.slug === params.slug);
+export default async function ListDetailPage({ 
+  params 
+}: { 
+  params: Promise<{ category: string; slug: string }> 
+}) {
+  // Await the params Promise
+  const { category, slug } = await params;
+  
+  const list = lists.find((l) => l.slug === slug);
 
   if (!list) {
     notFound();
@@ -46,7 +53,7 @@ export default function ListDetailPage({ params }: { params: { category: string;
               <p className="font-medium text-[#1a1a1a]">{item.image_description}</p>
               {item.price && <p className="text-sm text-[#6b6b6b]">${item.price}</p>}
               <div className="flex space-x-4 mt-2">
-                {item.view_url && (
+                {item.view_url && item.view_url !== '#' && (
                   <a
                     href={item.view_url}
                     target="_blank"
@@ -56,7 +63,7 @@ export default function ListDetailPage({ params }: { params: { category: string;
                     View
                   </a>
                 )}
-                {item.buy_url && (
+                {item.buy_url && item.buy_url !== '#' && (
                   <a
                     href={item.buy_url}
                     target="_blank"
