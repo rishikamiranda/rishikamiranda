@@ -1,5 +1,7 @@
+// src/app/lists/page.tsx
 import Link from 'next/link';
-import { getAllLists, categoryDisplayNames } from '@/actions/lists';
+import { getAllLists } from '@/actions/lists';
+import { type List, type ListCategory, getListCategoryDisplayName } from '@/types';
 
 export const revalidate = 3600;
 
@@ -7,11 +9,11 @@ export default async function ListsIndexPage() {
   const lists = await getAllLists();
 
   // Group lists by category
-  const groupedLists = lists.reduce((acc, list) => {
+  const groupedLists = lists.reduce((acc: Record<string, List[]>, list: List) => {
     if (!acc[list.category]) acc[list.category] = [];
     acc[list.category].push(list);
     return acc;
-  }, {} as Record<string, typeof lists>);
+  }, {});
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16">
@@ -25,10 +27,10 @@ export default async function ListsIndexPage() {
         Object.entries(groupedLists).map(([category, items]) => (
           <div key={category} className="mb-12">
             <h2 className="text-2xl font-light text-[#1a1a1a] mb-4 capitalize">
-              {categoryDisplayNames[category as keyof typeof categoryDisplayNames] || category}
+              {getListCategoryDisplayName(category as ListCategory)}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {items.map((list) => (
+              {(items as List[]).map((list: List) => (
                 <Link
                   key={list.id}
                   href={`/lists/${list.category}/${list.slug}`}

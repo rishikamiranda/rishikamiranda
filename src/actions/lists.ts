@@ -2,124 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
-import { Database } from '@/types/supabase';
-
-export type List = Database['public']['Tables']['lists']['Row'];
-export type ListCategory = 'shopping' | 'style-guide';
-export type ListItem = Database['public']['Tables']['list_items']['Row'];
-
-export const categoryDisplayNames: Record<ListCategory, string> = {
-  shopping: 'Shopping',
-  'style-guide': 'Style Guide',
-};
-
-export const ALL_CATEGORIES: ListCategory[] = ['shopping', 'style-guide'];
-
-// ---------- PUBLIC ACTIONS ----------
-
-export async function getAllLists() {
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from('lists')
-      .select('*')
-      .eq('published', true)
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data || [];
-  } catch (error) {
-    console.error('Error fetching lists:', error);
-    return [];
-  }
-}
-
-export async function getListBySlug(slug: string) {
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from('lists')
-      .select('*')
-      .eq('slug', slug)
-      .eq('published', true)
-      .single();
-
-    if (error) throw error;
-    return data;
-  } catch (error) {
-    console.error('Error fetching list:', error);
-    return null;
-  }
-}
-
-export async function getListSlugs() {
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from('lists')
-      .select('slug')
-      .eq('published', true);
-
-    if (error) throw error;
-    return data || [];
-  } catch (error) {
-    console.error('Error fetching list slugs:', error);
-    return [];
-  }
-}
-
-export async function getListsByCategory(category: ListCategory) {
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from('lists')
-      .select('*')
-      .eq('published', true)
-      .eq('category', category)
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data || [];
-  } catch (error) {
-    console.error(`Error fetching lists for category ${category}:`, error);
-    return [];
-  }
-}
-
-// ---------- LIST ITEMS ACTIONS ----------
-
-export async function getListItems(listId: string) {
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from('list_items')
-      .select('*')
-      .eq('list_id', listId)
-      .order('created_at', { ascending: true });
-
-    if (error) throw error;
-    return data || [];
-  } catch (error) {
-    console.error('Error fetching list items:', error);
-    return [];
-  }
-}
-
-export async function getListWithItems(slug: string) {
-  try {
-    const supabase = await createClient();
-    const list = await getListBySlug(slug);
-    if (!list) return null;
-
-    const items = await getListItems(list.id);
-    return { ...list, items };
-  } catch (error) {
-    console.error('Error fetching list with items:', error);
-    return null;
-  }
-}
-
-// ---------- ADMIN ACTIONS ----------
+import { type List, type ListCategory, type ListItem } from '@/types';
 
 type ListInput = {
   title: string;
@@ -140,7 +23,136 @@ type ListItemInput = {
   buy_url?: string | null;
 };
 
-export async function getAllListsForAdmin() {
+// ---------- PUBLIC ACTIONS ----------
+
+export async function getAllLists(): Promise<List[]> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('lists')
+      .select('*')
+      .eq('published', true)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching lists:', error);
+    return [];
+  }
+}
+
+export async function getListBySlug(slug: string): Promise<List | null> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('lists')
+      .select('*')
+      .eq('slug', slug)
+      .eq('published', true)
+      .single();
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error fetching list:', error);
+    return null;
+  }
+}
+
+export async function getListSlugs(): Promise<{ slug: string; category: string }[]> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('lists')
+      .select('slug, category')
+      .eq('published', true);
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching list slugs:', error);
+    return [];
+  }
+}
+
+export async function getListsByCategory(category: ListCategory): Promise<List[]> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('lists')
+      .select('*')
+      .eq('published', true)
+      .eq('category', category)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error(`Error fetching lists for category ${category}:`, error);
+    return [];
+  }
+}
+
+// ---------- LIST ITEMS ACTIONS ----------
+
+export async function getListItems(listId: string): Promise<ListItem[]> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('list_items')
+      .select('*')
+      .eq('list_id', listId)
+      .order('created_at', { ascending: true });
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching list items:', error);
+    return [];
+  }
+}
+
+export async function getListWithItems(slug: string) {
+  try {
+    const supabase = await createClient();
+    
+    const { data: list, error: listError } = await supabase
+      .from('lists')
+      .select('*')
+      .eq('slug', slug)
+      .eq('published', true)
+      .single();
+
+    if (listError || !list) {
+      console.error('Error fetching list:', listError);
+      return null;
+    }
+
+    const { data: items, error: itemsError } = await supabase
+      .from('list_items')
+      .select('*')
+      .eq('list_id', list.id)
+      .order('created_at', { ascending: true });
+
+    if (itemsError) {
+      console.error('Error fetching list items:', itemsError);
+      return null;
+    }
+
+    return {
+      ...list,
+      items: items || [],
+    };
+  } catch (error) {
+    console.error('Error fetching list with items:', error);
+    return null;
+  }
+}
+
+// ---------- ADMIN ACTIONS ----------
+
+export async function getAllListsForAdmin(): Promise<List[]> {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
@@ -225,7 +237,7 @@ export async function deleteList(id: string) {
 
 // ---------- LIST ITEMS ADMIN ACTIONS ----------
 
-export async function getAllListItemsForAdmin() {
+export async function getAllListItemsForAdmin(): Promise<ListItem[]> {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
@@ -241,7 +253,7 @@ export async function getAllListItemsForAdmin() {
   }
 }
 
-export async function getUnassignedListItems() {
+export async function getUnassignedListItems(): Promise<ListItem[]> {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase

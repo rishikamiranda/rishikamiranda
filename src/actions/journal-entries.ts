@@ -2,22 +2,11 @@
 
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
-import { Database } from '@/types/supabase';
-
-export type JournalEntry = Database['public']['Tables']['journal_entries']['Row'];
-export type JournalCategory = Database['public']['Enums']['journal_category'];
-
-export const categoryDisplayNames: Record<JournalCategory, string> = {
-  reflections: 'Reflections',
-  projects: 'Projects',
-  resources: 'Resources',
-};
-
-export const ALL_CATEGORIES: JournalCategory[] = ['reflections', 'projects', 'resources'];
+import { type JournalEntry, type JournalCategory } from '@/types';
 
 // ---------- PUBLIC ACTIONS ----------
 
-export async function getAllJournalEntries() {
+export async function getAllJournalEntries(): Promise<JournalEntry[]> {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
@@ -34,7 +23,7 @@ export async function getAllJournalEntries() {
   }
 }
 
-export async function getJournalEntryBySlug(slug: string) {
+export async function getJournalEntryBySlug(slug: string): Promise<JournalEntry | null> {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
@@ -52,7 +41,7 @@ export async function getJournalEntryBySlug(slug: string) {
   }
 }
 
-export async function getJournalSlugs() {
+export async function getJournalSlugs(): Promise<{ slug: string }[]> {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
@@ -68,7 +57,7 @@ export async function getJournalSlugs() {
   }
 }
 
-export async function getJournalEntriesByCategory(category: JournalCategory) {
+export async function getJournalEntriesByCategory(category: JournalCategory): Promise<JournalEntry[]> {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
@@ -86,9 +75,34 @@ export async function getJournalEntriesByCategory(category: JournalCategory) {
   }
 }
 
+export async function getAvailableCategories(): Promise<JournalCategory[]> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('journal_entries')
+      .select('categories')
+      .eq('published', true);
+
+    if (error) throw error;
+
+    const categorySet = new Set<JournalCategory>();
+    data?.forEach(entry => {
+      if (entry.categories) {
+        entry.categories.forEach((cat: JournalCategory) => categorySet.add(cat));
+      }
+    });
+
+    const available = Array.from(categorySet);
+    return available.length > 0 ? available : ['reflections', 'projects', 'resources'] as JournalCategory[];
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return ['reflections', 'projects', 'resources'] as JournalCategory[];
+  }
+}
+
 // ---------- ADMIN ACTIONS ----------
 
-export async function getAllEntriesForAdmin() {
+export async function getAllEntriesForAdmin(): Promise<JournalEntry[]> {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
@@ -131,7 +145,6 @@ export async function createJournalEntry(data: JournalEntryInput) {
 
     if (error) throw error;
 
-    // Revalidate the journal pages
     revalidatePath('/journal');
     revalidatePath('/');
     revalidatePath(`/journal/${data.slug}`);
@@ -155,7 +168,6 @@ export async function updateJournalEntry(id: string, data: Partial<JournalEntryI
 
     if (error) throw error;
 
-    // Revalidate the journal pages
     revalidatePath('/journal');
     revalidatePath('/');
     if (data.slug) {
@@ -179,7 +191,6 @@ export async function deleteJournalEntry(id: string) {
 
     if (error) throw error;
 
-    // Revalidate the journal pages
     revalidatePath('/journal');
     revalidatePath('/');
 
@@ -188,15 +199,4 @@ export async function deleteJournalEntry(id: string) {
     console.error('Error deleting journal entry:', error);
     return { success: false, error: (error as Error).message };
   }
-}
-
-// ---------- HELPERS ----------
-
-export function getCoverImage(entry: JournalEntry): string | null {
-  return entry.cover_image || (entry.images?.[0] as any)?.url || null;
-}
-
-export function getImageUrls(entry: JournalEntry): string[] {
-  if (!entry.images) return [];
-  return (entry.images as any[]).map(img => img.url).filter(Boolean);
 }

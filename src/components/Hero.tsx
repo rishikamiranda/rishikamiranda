@@ -55,36 +55,38 @@ export default function Hero({ images, title, subtitle }: HeroProps) {
             </div>
           </div>
 
-          {/* Bottom row: social icons only */}
-          <div className="flex justify-end mt-12">
-            <div className="flex gap-4 sm:gap-6">
-              <a
-                href="https://kyrah.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/60 hover:text-white transition-colors"
-                aria-label="Website"
-              >
-                <WebsiteIcon size={20} color="currentColor" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/rishika-miranda-163260329/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/60 hover:text-white transition-colors"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon size={20} color="currentColor" />
-              </a>
-              <a
-                href="https://www.instagram.com/rishikamiranda/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/60 hover:text-white transition-colors"
-                aria-label="Instagram"
-              >
-                <InstagramIcon size={20} color="currentColor" />
-              </a>
+          {/* Divider + Social Icons */}
+          <div className="mt-12 pt-6 border-t border-white/20">
+            <div className="flex justify-end">
+              <div className="flex gap-4 sm:gap-6">
+                <a
+                  href="https://kyrah.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/60 hover:text-white transition-colors"
+                  aria-label="Website"
+                >
+                  <WebsiteIcon size={20} color="currentColor" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/rishika-miranda-163260329/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/60 hover:text-white transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <LinkedinIcon size={20} color="currentColor" />
+                </a>
+                <a
+                  href="https://www.instagram.com/rishikamiranda/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/60 hover:text-white transition-colors"
+                  aria-label="Instagram"
+                >
+                  <InstagramIcon size={20} color="currentColor" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

@@ -1,14 +1,31 @@
+// src/app/page.tsx
 import Link from 'next/link';
 import Hero from '@/components/Hero';
-import { lists, heroImages } from '@/lib/dummy-data';
-import { getAllJournalEntries, categoryDisplayNames } from '@/lib/content/journal-entries';
+import { getAllJournalEntries } from '@/actions/journal-entries';
+import { getAllLists } from '@/actions/lists';
+import { 
+  getJournalCategoryDisplayName, 
+  getListCategoryDisplayName,
+  type List 
+} from '@/types';
 
-// ISR
+// ISR - Revalidate every 30 days
 export const revalidate = 2592000;
+
+const heroImages: string[] = [
+  "/hero/1.jpeg",
+  "/hero/2.jpeg",
+  "/hero/3.jpeg",
+  "/hero/4.jpeg"
+]
 
 export default async function HomePage() {
   const allEntries = await getAllJournalEntries();
   const journalEntries = allEntries.slice(0, 5);
+  
+  const allLists = await getAllLists();
+  const recentLists = allLists.slice(0, 4);
+
   return (
     <>
       {/* Hero Section */}
@@ -30,7 +47,7 @@ export default async function HomePage() {
           <div className="md:w-[40%] flex justify-center md:justify-start">
             <div className="w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-[#e0e0e0] flex-shrink-0">
               <img
-                src="/images/rishika-portrait.jpg"
+                src="/rishika.jpeg"
                 alt="Rishika Miranda"
                 className="w-full h-full object-cover grayscale"
               />
@@ -83,7 +100,9 @@ export default async function HomePage() {
             <p className="text-[14px] text-[#4a4a4a] leading-relaxed font-light">
               Comprehensive architectural and interior frameworks developed from deep site context, artisanal heritage, and spatial clarity.
             </p>
-            <button>
+            <button
+              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
+            >
               Enquire about this →
             </button>
           </div>
@@ -97,7 +116,9 @@ export default async function HomePage() {
             <p className="text-[14px] text-[#4a4a4a] leading-relaxed font-light">
               Intuitively crafted physical items engineered to complement the physical behaviors, textures, and daily spatial rituals of the end user.
             </p>
-            <button>
+            <button
+              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
+            >
               Enquire about this →
             </button>
           </div>
@@ -111,7 +132,9 @@ export default async function HomePage() {
             <p className="text-[14px] text-[#4a4a4a] leading-relaxed font-light">
               Designing premium, cross-disciplinary events that weave together layout design, material culture, food, music, and raw community conversations.
             </p>
-            <button>
+            <button
+              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
+            >
               Enquire about this →
             </button>
           </div>
@@ -169,12 +192,12 @@ export default async function HomePage() {
                       )}
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {displayCategories.map((cat) => (
+                      {displayCategories.map((cat: string) => (
                         <span
                           key={cat}
                           className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light border border-[#e0e0e0] px-2 py-0.5 rounded"
                         >
-                          {categoryDisplayNames[cat] || cat}
+                          {getJournalCategoryDisplayName(cat)}
                         </span>
                       ))}
                     </div>
@@ -210,36 +233,49 @@ export default async function HomePage() {
             All Lists →
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {lists.map((list) => (
-            <Link
-              key={list.slug}
-              href={`/lists/${list.category.toLowerCase()}/${list.slug}`}
-              className="group block transition-all duration-300"
-            >
-              <div className="overflow-hidden bg-[#f5f5f5] aspect-[4/3]">
-                <img
-                  src={list.image}
-                  alt={list.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
-                />
-              </div>
-              <div className="mt-4 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
-                <div>
-                  <h3 className="text-lg font-light text-[#1a1a1a] group-hover:text-[#6b6b6b] transition-colors duration-300 tracking-wide">
-                    {list.title}
-                  </h3>
-                  <p className="text-sm text-[#6b6b6b] font-light leading-relaxed mt-1 line-clamp-2">
-                    {list.description}
-                  </p>
+
+        {recentLists.length === 0 ? (
+          <p className="text-[#6b6b6b]">No lists available yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {recentLists.map((list: List) => (
+              <Link
+                key={list.id}
+                href={`/lists/${list.category}/${list.slug}`}
+                className="group block transition-all duration-300"
+              >
+                <div className="overflow-hidden bg-[#f5f5f5] aspect-[4/3]">
+                  {list.cover_image ? (
+                    <img
+                      src={list.cover_image}
+                      alt={list.title}
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-[#6b6b6b] text-sm">
+                      No image
+                    </div>
+                  )}
                 </div>
-                <span className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light whitespace-nowrap mt-1 sm:mt-0.5">
-                  {list.category}
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
+                <div className="mt-4 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+                  <div>
+                    <h3 className="text-lg font-light text-[#1a1a1a] group-hover:text-[#6b6b6b] transition-colors duration-300 tracking-wide">
+                      {list.title}
+                    </h3>
+                    {list.description && (
+                      <p className="text-sm text-[#6b6b6b] font-light leading-relaxed mt-1 line-clamp-2">
+                        {list.description}
+                      </p>
+                    )}
+                  </div>
+                  <span className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light whitespace-nowrap mt-1 sm:mt-0.5">
+                    {getListCategoryDisplayName(list.category)}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* CONTACT DIALOG */}
@@ -270,7 +306,10 @@ export default async function HomePage() {
             />
           </div>
           <div className="flex justify-end gap-4 mt-2">
-            <button>
+            <button
+              type="button"
+              className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors font-light"
+            >
               Cancel
             </button>
             <button
