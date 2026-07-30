@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { lists, listItems } from '@/lib/dummy-data';
 
+// Revalidate every 30 days
+export const revalidate = 2592000;
+
 export async function generateStaticParams() {
   return lists.map((list) => ({
     category: list.category.toLowerCase(),

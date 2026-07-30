@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { getAllJournalEntries, categoryDisplayNames } from '@/lib/content/journal-entries';
 
-// This page is statically generated at build time
+//ISR
+export const revalidate = 2592000;
+
 export default async function JournalIndexPage() {
   const entries = await getAllJournalEntries();
 

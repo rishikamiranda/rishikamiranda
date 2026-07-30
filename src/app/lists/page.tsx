@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import { lists } from '@/lib/dummy-data';
 
+// Revalidate every 30 days
+export const revalidate = 2592000;
+
 export default function ListsIndexPage() {
   // Group lists by category
   const groupedLists = lists.reduce((acc, list) => {

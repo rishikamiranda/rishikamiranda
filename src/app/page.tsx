@@ -3,6 +3,8 @@ import Hero from '@/components/Hero';
 import { lists, heroImages } from '@/lib/dummy-data';
 import { getAllJournalEntries, categoryDisplayNames } from '@/lib/content/journal-entries';
 
+// ISR
+export const revalidate = 2592000;
 
 export default async function HomePage() {
   const allEntries = await getAllJournalEntries();

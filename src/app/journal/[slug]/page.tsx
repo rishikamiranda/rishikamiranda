@@ -7,6 +7,9 @@ import {
 } from '@/lib/content/journal-entries';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
 
+// Revalidate every 30 days
+export const revalidate = 2592000;
+
 // Generate all static paths at build time
 export async function generateStaticParams() {
   const slugs = await getJournalSlugs();
@@ -28,7 +31,7 @@ export default async function JournalDetailPage({
     notFound();
   }
 
-  const heroImage = entry.images?.[0] || null;
+  const heroImage = entry.cover_image || null;
 
   return (
     <article className="max-w-3xl mx-auto px-4 py-12 sm:py-16">
