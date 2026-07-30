@@ -6,6 +6,7 @@ import { Database } from '@/types/supabase';
 
 export type List = Database['public']['Tables']['lists']['Row'];
 export type ListCategory = 'shopping' | 'style-guide';
+export type ListItem = Database['public']['Tables']['list_items']['Row'];
 
 export const categoryDisplayNames: Record<ListCategory, string> = {
   shopping: 'Shopping',
@@ -85,6 +86,39 @@ export async function getListsByCategory(category: ListCategory) {
   }
 }
 
+// ---------- LIST ITEMS ACTIONS ----------
+
+export async function getListItems(listId: string) {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('list_items')
+      .select('*')
+      .eq('list_id', listId)
+      .order('created_at', { ascending: true });
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching list items:', error);
+    return [];
+  }
+}
+
+export async function getListWithItems(slug: string) {
+  try {
+    const supabase = await createClient();
+    const list = await getListBySlug(slug);
+    if (!list) return null;
+
+    const items = await getListItems(list.id);
+    return { ...list, items };
+  } catch (error) {
+    console.error('Error fetching list with items:', error);
+    return null;
+  }
+}
+
 // ---------- ADMIN ACTIONS ----------
 
 type ListInput = {
@@ -95,6 +129,15 @@ type ListInput = {
   cover_image?: string | null;
   category: ListCategory;
   published?: boolean;
+};
+
+type ListItemInput = {
+  list_id?: string | null;
+  image_url?: string | null;
+  image_description?: string | null;
+  price?: number | null;
+  view_url?: string | null;
+  buy_url?: string | null;
 };
 
 export async function getAllListsForAdmin() {
@@ -150,7 +193,7 @@ export async function updateList(id: string, data: Partial<ListInput>) {
     revalidatePath('/lists');
     revalidatePath('/');
     if (data.slug) {
-      revalidatePath(`/lists/${data.category || result.category}/${data.slug}`);
+      revalidatePath(`/lists/${result.category}/${data.slug}`);
     }
 
     return { success: true, data: result };
@@ -180,55 +223,40 @@ export async function deleteList(id: string) {
   }
 }
 
-// ---------- LIST ITEMS ACTIONS ----------
+// ---------- LIST ITEMS ADMIN ACTIONS ----------
 
-export type ListItem = Database['public']['Tables']['list_items']['Row'];
-
-export async function getListItems(listId: string) {
+export async function getAllListItemsForAdmin() {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase
       .from('list_items')
       .select('*')
-      .eq('list_id', listId)
-      .order('created_at', { ascending: true });
+      .order('created_at', { ascending: false });
 
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching list items:', error);
+    console.error('Error fetching all list items:', error);
     return [];
   }
 }
 
-export async function getListWithItems(listId: string) {
+export async function getUnassignedListItems() {
   try {
     const supabase = await createClient();
-    const [listResult, itemsResult] = await Promise.all([
-      supabase.from('lists').select('*').eq('id', listId).single(),
-      supabase.from('list_items').select('*').eq('list_id', listId).order('created_at', { ascending: true }),
-    ]);
+    const { data, error } = await supabase
+      .from('list_items')
+      .select('*')
+      .is('list_id', null)
+      .order('created_at', { ascending: false });
 
-    if (listResult.error) throw listResult.error;
-
-    return {
-      ...listResult.data,
-      items: itemsResult.data || [],
-    };
+    if (error) throw error;
+    return data || [];
   } catch (error) {
-    console.error('Error fetching list with items:', error);
-    return null;
+    console.error('Error fetching unassigned list items:', error);
+    return [];
   }
 }
-
-type ListItemInput = {
-  list_id?: string | null;
-  image_url?: string | null;
-  image_description?: string | null;
-  price?: number | null;
-  view_url?: string | null;
-  buy_url?: string | null;
-};
 
 export async function createListItem(data: ListItemInput) {
   try {
@@ -244,6 +272,7 @@ export async function createListItem(data: ListItemInput) {
     if (data.list_id) {
       revalidatePath(`/lists/${data.list_id}`);
     }
+    revalidatePath('/lists');
 
     return { success: true, data: result };
   } catch (error) {
@@ -267,6 +296,7 @@ export async function updateListItem(id: string, data: Partial<ListItemInput>) {
     if (result.list_id) {
       revalidatePath(`/lists/${result.list_id}`);
     }
+    revalidatePath('/lists');
 
     return { success: true, data: result };
   } catch (error) {
@@ -278,7 +308,6 @@ export async function updateListItem(id: string, data: Partial<ListItemInput>) {
 export async function deleteListItem(id: string) {
   try {
     const supabase = await createClient();
-    // First get the list_id to revalidate
     const { data: item } = await supabase
       .from('list_items')
       .select('list_id')
@@ -295,6 +324,7 @@ export async function deleteListItem(id: string) {
     if (item?.list_id) {
       revalidatePath(`/lists/${item.list_id}`);
     }
+    revalidatePath('/lists');
 
     return { success: true };
   } catch (error) {
@@ -342,43 +372,11 @@ export async function removeItemFromList(itemId: string) {
     if (item?.list_id) {
       revalidatePath(`/lists/${item.list_id}`);
     }
+    revalidatePath('/lists');
 
     return { success: true };
   } catch (error) {
     console.error('Error removing item from list:', error);
     return { success: false, error: (error as Error).message };
-  }
-}
-
-export async function getAllListItems() {
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from('list_items')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data || [];
-  } catch (error) {
-    console.error('Error fetching all list items:', error);
-    return [];
-  }
-}
-
-export async function getUnassignedListItems() {
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from('list_items')
-      .select('*')
-      .is('list_id', null)
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data || [];
-  } catch (error) {
-    console.error('Error fetching unassigned list items:', error);
-    return [];
   }
 }
