@@ -19,11 +19,12 @@ export type Database = {
           author: string | null
           categories: Database["public"]["Enums"]["journal_category"][] | null
           content: string | null
+          cover_image: string | null
           created_at: string | null
           description: string | null
           featured: boolean | null
           id: string
-          images: string[] | null
+          images: Json[] | null
           linkedin_link_url: string | null
           published: boolean | null
           reading_time: number | null
@@ -37,11 +38,12 @@ export type Database = {
           author?: string | null
           categories?: Database["public"]["Enums"]["journal_category"][] | null
           content?: string | null
+          cover_image?: string | null
           created_at?: string | null
           description?: string | null
           featured?: boolean | null
           id?: string
-          images?: string[] | null
+          images?: Json[] | null
           linkedin_link_url?: string | null
           published?: boolean | null
           reading_time?: number | null
@@ -55,11 +57,12 @@ export type Database = {
           author?: string | null
           categories?: Database["public"]["Enums"]["journal_category"][] | null
           content?: string | null
+          cover_image?: string | null
           created_at?: string | null
           description?: string | null
           featured?: boolean | null
           id?: string
-          images?: string[] | null
+          images?: Json[] | null
           linkedin_link_url?: string | null
           published?: boolean | null
           reading_time?: number | null
@@ -122,7 +125,9 @@ export type Database = {
         Row: {
           category: string
           content: string | null
+          cover_image: string | null
           created_at: string | null
+          description: string | null
           id: string
           published: boolean | null
           slug: string
@@ -133,7 +138,9 @@ export type Database = {
         Insert: {
           category: string
           content?: string | null
+          cover_image?: string | null
           created_at?: string | null
+          description?: string | null
           id?: string
           published?: boolean | null
           slug: string
@@ -144,7 +151,9 @@ export type Database = {
         Update: {
           category?: string
           content?: string | null
+          cover_image?: string | null
           created_at?: string | null
+          description?: string | null
           id?: string
           published?: boolean | null
           slug?: string
