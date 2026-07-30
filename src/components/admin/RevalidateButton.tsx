@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
-export default function RevalidateButton() {
+export function RevalidateButton() {
   const [loading, setLoading] = useState(false);
 
   const handleRevalidate = async () => {
