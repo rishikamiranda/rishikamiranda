@@ -9,14 +9,16 @@ import {
   getAllListItemsForAdmin,
   addItemsToList,
   removeItemFromList,
-  type List,
-  type ListCategory,
-  type ListItem,
-  ALL_CATEGORIES,
-  categoryDisplayNames
 } from '@/actions/lists';
 import { uploadListImage, deleteListImage, type UploadedImage } from '@/lib/supabase/storage';
 import ImageUpload from './ImageUpload';
+import { 
+  type List, 
+  type ListCategory, 
+  type ListItem,
+  LIST_CATEGORIES,
+  LIST_CATEGORY_NAMES,
+} from '@/types';
 import { Pencil, Trash2, Plus, X, Link2, Unlink } from 'lucide-react';
 
 export default function ListsManager() {
@@ -287,9 +289,9 @@ export default function ListsManager() {
               onChange={(e) => setForm({ ...form, category: e.target.value as ListCategory })}
               className="w-full border-b border-[#d0d0d0] py-1 focus:outline-none focus:border-[#1a1a1a]"
             >
-              {ALL_CATEGORIES.map((cat) => (
+              {LIST_CATEGORIES.map((cat) => (
                 <option key={cat} value={cat}>
-                  {categoryDisplayNames[cat]}
+                  {LIST_CATEGORY_NAMES[cat]}
                 </option>
               ))}
             </select>
@@ -383,7 +385,7 @@ export default function ListsManager() {
                     </td>
                     <td className="py-3">
                       <span className="text-xs px-2 py-1 rounded bg-gray-100">
-                        {categoryDisplayNames[list.category as ListCategory] || list.category}
+                        {LIST_CATEGORY_NAMES[list.category as ListCategory] || list.category}
                       </span>
                     </td>
                     <td className="py-3">

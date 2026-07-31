@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { getAllJournalEntries, categoryDisplayNames } from '@/lib/content/journal-entries';
+import { getAllJournalEntries } from '@/actions/journal-entries';
+import { categoryDisplayNames } from '@/types';
 
-//ISR
-export const revalidate = 2592000;
+export const revalidate = 3600;
 
 export default async function JournalIndexPage() {
   const entries = await getAllJournalEntries();
@@ -46,7 +46,7 @@ export default async function JournalIndexPage() {
                   )}
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {entry.categories && entry.categories.map((cat) => (
+                  {entry.categories?.map((cat) => (
                     <span
                       key={cat}
                       className="text-[10px] tracking-[0.1em] uppercase text-[#6b6b6b] font-light border border-[#e0e0e0] px-2 py-0.5 rounded"

@@ -6,11 +6,13 @@ import {
   createJournalEntry,
   updateJournalEntry,
   deleteJournalEntry,
+} from '@/actions/journal-entries';
+import { 
+  ALL_CATEGORIES, 
+  categoryDisplayNames,
   type JournalEntry,
   type JournalCategory,
-  ALL_CATEGORIES,
-  categoryDisplayNames
-} from '@/actions/journal-entries';
+} from '@/types';
 import { uploadJournalImages, deleteJournalImage, type UploadedImage } from '@/lib/supabase/storage';
 import ImageUpload from './ImageUpload';
 import { Pencil, Trash2, Plus, X } from 'lucide-react';
@@ -355,7 +357,7 @@ export default function JournalManager() {
           <div className="mb-4">
             <label className="block text-xs uppercase tracking-wider text-[#6b6b6b] mb-1">Categories</label>
             <div className="flex flex-wrap gap-4">
-              {ALL_CATEGORIES.map((cat) => (
+              {ALL_CATEGORIES.map((cat: JournalCategory) => (
                 <label key={cat} className="flex items-center gap-2 text-sm">
                   <input
                     type="checkbox"
@@ -481,7 +483,7 @@ export default function JournalManager() {
                   </td>
                   <td className="py-3">
                     <div className="flex flex-wrap gap-1">
-                      {entry.categories?.map((cat) => (
+                      {entry.categories?.map((cat: JournalCategory) => (
                         <span key={cat} className="text-[10px] uppercase border border-[#e0e0e0] px-2 py-0.5 rounded">
                           {categoryDisplayNames[cat] || cat}
                         </span>
