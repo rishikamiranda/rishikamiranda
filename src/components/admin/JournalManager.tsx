@@ -293,7 +293,7 @@ export default function JournalManager() {
             <textarea
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
-              rows={8}
+              rows={10}
               className="w-full border border-[#e0e0e0] p-3 focus:outline-none focus:border-[#1a1a1a] font-mono text-sm rounded"
               placeholder="Write your content in markdown..."
             />

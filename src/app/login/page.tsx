@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signInWithPassword } from '@/actions/auth';
+import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -15,25 +15,24 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Initialize client inside the handler, not at component level
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const formData = new FormData();
-      formData.append('email', email);
-      formData.append('password', password);
+      const supabase = createClient();
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-      const result = await signInWithPassword(formData);
+      if (error) throw error;
 
-      if (result.success) {
-        toast.success('Welcome back!');
-        router.push('/admin');
-      } else {
-        toast.error(result.error || 'Login failed. Please try again.');
-      }
-    } catch (error) {
-      toast.error('An unexpected error occurred.');
+      toast.success('Welcome back!');
+      router.push('/admin');
+    } catch (error: any) {
+      toast.error(error.message || 'Login failed. Please try again.');
     } finally {
       setLoading(false);
     }

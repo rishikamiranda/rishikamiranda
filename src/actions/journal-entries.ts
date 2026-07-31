@@ -1,7 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { createClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/server';
 import { type JournalEntry, type JournalCategory } from '@/types';
 
 // ---------- PUBLIC ACTIONS ----------
