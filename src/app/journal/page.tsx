@@ -12,8 +12,8 @@ export default async function JournalIndexPage() {
       <div className="mb-12">
         <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">Journal</span>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-[#1a1a1a] tracking-tight mt-2">
-          Observations on<br />
-          <span className="font-medium">mindful living</span>
+          Writings and resources<br />
+          <span className="font-medium">on design</span>
         </h1>
       </div>
 
@@ -25,7 +25,7 @@ export default async function JournalIndexPage() {
             <Link
               key={entry.id}
               href={`/journal/${entry.slug}`}
-              className="group block border-b border-[#eaeaea] py-4 px-2 hover:border-[#d0d0d0] transition-colors"
+              className="group block border-b border-[#eaeaea] py-4 hover:border-[#d0d0d0] transition-colors"
             >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                 <div>

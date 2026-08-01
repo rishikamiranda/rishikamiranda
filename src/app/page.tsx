@@ -1,6 +1,8 @@
 // src/app/page.tsx
 import Link from 'next/link';
 import Hero from '@/components/Hero';
+import About from '@/components/home/About';
+import Work from '@/components/home/Work';
 import { getAllJournalEntries } from '@/actions/journal-entries';
 import { getAllLists } from '@/actions/lists';
 import { 
@@ -41,44 +43,7 @@ export default async function HomePage() {
       </div>
 
       {/* ABOUT SECTION */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
-        <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
-          {/* LEFT: Circular Portrait */}
-          <div className="md:w-[40%] flex justify-center md:justify-start">
-            <div className="w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-[#e0e0e0] flex-shrink-0">
-              <img
-                src="/rishika.jpeg"
-                alt="Rishika Miranda"
-                className="w-full h-full object-cover grayscale"
-              />
-            </div>
-          </div>
-
-          {/* RIGHT: Text Content */}
-          <div className="md:w-[60%] flex flex-col">
-            <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b] mb-4">About</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#1a1a1a] leading-tight mb-6">
-              Hi, I am Rishika
-            </h2>
-            <div className="space-y-4 text-[15px] text-[#3a3a3a] leading-relaxed font-light">
-              <p>
-                I'm a Bangalore-based architect and creative lead working across architecture, interiors, storytelling and experiential design. Architecture is how I make sense of the world.
-              </p>
-              <p>
-                Over the years, that has led me far beyond buildings. Into interiors, furniture, travel, art, craft, culture and the many ways people shape the spaces around them. Much of my work takes shape through Kyrah Design Studio, while other interests find their way into writing, events, collaborations and the occasional side project. This website is a collection of projects, places and ideas that continue to inform how I think, design and create.
-              </p>
-            </div>
-            <div className="mt-6">
-              <Link
-                href="/about"
-                className="text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
-              >
-                How I Got Here →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <About />
 
       {/* DIVIDER */}
       <div className="max-w-6xl mx-auto px-4 sm:px-8 w-full">
@@ -86,60 +51,7 @@ export default async function HomePage() {
       </div>
 
       {/* WHAT I DO SECTION */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
-        <div className="mb-12">
-          <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">What I do</span>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-          {/* 01. Architecture & Interiors */}
-          <div className="border-t border-[#e0e0e0] pt-6">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-[10px] tracking-[0.2em] text-[#6b6b6b] font-medium">01</span>
-            </div>
-            <h3 className="text-xl font-light text-[#1a1a1a] mb-3 tracking-wide">Architecture &amp; Interiors</h3>
-            <p className="text-[14px] text-[#4a4a4a] leading-relaxed font-light">
-              Comprehensive architectural and interior frameworks developed from deep site context, artisanal heritage, and spatial clarity.
-            </p>
-            <button
-              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
-            >
-              Enquire about this →
-            </button>
-          </div>
-
-          {/* 02. Furniture & Product Design */}
-          <div className="border-t border-[#e0e0e0] pt-6">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-[10px] tracking-[0.2em] text-[#6b6b6b] font-medium">02</span>
-            </div>
-            <h3 className="text-xl font-light text-[#1a1a1a] mb-3 tracking-wide">Furniture &amp; Product Design</h3>
-            <p className="text-[14px] text-[#4a4a4a] leading-relaxed font-light">
-              Intuitively crafted physical items engineered to complement the physical behaviors, textures, and daily spatial rituals of the end user.
-            </p>
-            <button
-              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
-            >
-              Enquire about this →
-            </button>
-          </div>
-
-          {/* 03. Experience Curation */}
-          <div className="border-t border-[#e0e0e0] pt-6">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-[10px] tracking-[0.2em] text-[#6b6b6b] font-medium">03</span>
-            </div>
-            <h3 className="text-xl font-light text-[#1a1a1a] mb-3 tracking-wide">Experience Curation</h3>
-            <p className="text-[14px] text-[#4a4a4a] leading-relaxed font-light">
-              Designing premium, cross-disciplinary events that weave together layout design, material culture, food, music, and raw community conversations.
-            </p>
-            <button
-              className="mt-6 text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
-            >
-              Enquire about this →
-            </button>
-          </div>
-        </div>
-      </section>
+      <Work />
 
       {/* DIVIDER */}
       <div className="max-w-6xl mx-auto px-4 sm:px-8 w-full">
@@ -148,13 +60,16 @@ export default async function HomePage() {
 
       {/* JOURNAL SECTION */}
       <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
-        <div className="flex items-end justify-between mb-10">
+        <div className="mb-12">
           <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">Journal</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#1a1a1a] leading-tight mt-2">
+            <span className="font-medium">Reflections </span> &amp; Resources
+          </h2>
         </div>
         <div className="space-y-4">
           {journalEntries.map((entry) => {
             // Get the first image from images array or use a placeholder
-            const heroImage = entry.images?.[0] || '';
+            const heroImage = entry.cover_image || '';
             const displayCategories = entry.categories || [];
 
             return (
@@ -207,7 +122,7 @@ export default async function HomePage() {
             );
           })}
         </div>
-        <div className="text-left mt-8">
+        <div className="text-right mt-8">
           <Link
             href="/journal"
             className="text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
@@ -224,14 +139,11 @@ export default async function HomePage() {
 
       {/* LISTS SECTION – Gallery Grid */}
       <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
-        <div className="flex items-end justify-between mb-10">
+        <div className="mb-12">
           <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">Lists</span>
-          <Link
-            href="/lists"
-            className="text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
-          >
-            All Lists →
-          </Link>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#1a1a1a] leading-tight mt-2">
+            Curated <span className="font-medium">Collections</span>
+          </h2>
         </div>
 
         {recentLists.length === 0 ? (
@@ -276,6 +188,15 @@ export default async function HomePage() {
             ))}
           </div>
         )}
+        
+        <div className="text-left mt-8">
+          <Link
+            href="/lists"
+            className="text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
+          >
+            All Lists →
+          </Link>
+        </div>
       </section>
 
       {/* CONTACT DIALOG */}
