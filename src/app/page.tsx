@@ -11,8 +11,6 @@ import {
   type List 
 } from '@/types';
 
-// ISR - Revalidate every 30 days
-export const revalidate = 2592000;
 
 const heroImages: string[] = [
   "/hero/1.jpeg",

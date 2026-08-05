@@ -7,17 +7,8 @@ import { categoryDisplayNames } from '@/types';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
 import PageHeader from '@/components/PageHeader';
 
-// Revalidate every 30 days
-export const revalidate = 2592000;
 
 // Generate all static paths at build time
-export async function generateStaticParams() {
-  const slugs = await getJournalSlugs();
-  return slugs.map(({ slug }) => ({
-    slug,
-  }));
-}
-
 export default async function JournalDetailPage({
   params,
 }: {

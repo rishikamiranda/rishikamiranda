@@ -1,20 +1,11 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { getJournalEntriesByCategory } from '@/actions/journal-entries';
 import { 
-  getJournalEntriesByCategory, 
-  getAvailableCategories, 
-  categoryDisplayNames,
-  ALL_CATEGORIES,
+  getJournalCategoryDisplayName, 
+  JOURNAL_CATEGORIES,
   type JournalCategory 
-} from '@/lib/content/journal-entries';
-
-// Generate all category paths at build time
-export async function generateStaticParams() {
-  const categories = await getAvailableCategories();
-  return categories.map((category) => ({
-    category,
-  }));
-}
+} from '@/types';
 
 export default async function JournalCategoryPage({
   params,
@@ -23,12 +14,13 @@ export default async function JournalCategoryPage({
 }) {
   const { category } = await params;
 
-  if (!ALL_CATEGORIES.includes(category as JournalCategory)) {
+  // Validate category
+  if (!JOURNAL_CATEGORIES.includes(category as JournalCategory)) {
     notFound();
   }
 
   const entries = await getJournalEntriesByCategory(category as JournalCategory);
-  const displayName = categoryDisplayNames[category as JournalCategory] || category;
+  const displayName = getJournalCategoryDisplayName(category);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 sm:py-16">

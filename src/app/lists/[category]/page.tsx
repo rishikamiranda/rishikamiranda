@@ -8,13 +8,7 @@ import {
   getListCategoryDisplayName 
 } from '@/types';
 
-export const revalidate = 3600;
 
-export async function generateStaticParams() {
-  return LIST_CATEGORIES.map((category) => ({
-    category,
-  }));
-}
 
 export default async function ListCategoryPage({
   params,
@@ -28,7 +22,7 @@ export default async function ListCategoryPage({
   }
 
   const lists = await getListsByCategory(category as ListCategory);
-  const displayName = getListCategoryDisplayName(category as ListCategory);
+  const displayName = getListCategoryDisplayName(category);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16">

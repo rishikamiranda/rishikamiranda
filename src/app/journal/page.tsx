@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { getAllJournalEntries } from '@/actions/journal-entries';
 import { categoryDisplayNames } from '@/types';
 
-export const revalidate = 3600;
 
 export default async function JournalIndexPage() {
   const entries = await getAllJournalEntries();

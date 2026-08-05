@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { getAllLists } from '@/actions/lists';
 import { type List, type ListCategory, getListCategoryDisplayName } from '@/types';
 
-export const revalidate = 3600;
 
 export default async function ListsIndexPage() {
   const lists = await getAllLists();
