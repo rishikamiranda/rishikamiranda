@@ -38,7 +38,7 @@ export default function ContactPage() {
       <div className="mb-12">
         <span className="step-line w-12 mb-6" />
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-[#1a1a1a] tracking-tight">
-          Let's <span className="font-medium">collaborate</span>
+          Let's collaborate
         </h1>
         <p className="text-[#6b6b6b] mt-4 max-w-xl">
           Have a project in mind? Looking to collaborate? I'd love to hear from you.

@@ -15,12 +15,12 @@
 
 @layer base {
   body {
-    background-color: #ffffff;
+    background-color: hsl(var(--background)); /* ← explicit */
     color: #1a1a1a;
     font-family: 'Geist', sans-serif;
     font-weight: 300;
     letter-spacing: 0.01em;
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 
   h1, h2, h3, h4 {
@@ -80,7 +80,7 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
+  --background: 40 15% 97%;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);

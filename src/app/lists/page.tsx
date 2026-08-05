@@ -17,11 +17,11 @@ export default async function ListsIndexPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16">
       <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-[#1a1a1a] tracking-tight mb-8">
-        Curated <span className="font-medium">Lists</span>
+        Resources
       </h1>
 
       {Object.keys(groupedLists).length === 0 ? (
-        <p className="text-[#6b6b6b] text-center py-12">No lists available yet.</p>
+        <p className="text-[#6b6b6b] text-center py-12">A collection of useful things is taking shape. More soon.</p>
       ) : (
         Object.entries(groupedLists).map(([category, items]) => (
           <div key={category} className="mb-12">

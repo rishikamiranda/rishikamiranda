@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { WebsiteIcon, LinkedinIcon, InstagramIcon } from '@/components/icons';
+import { LinkedinIcon, InstagramIcon } from '@/components/icons';
 
 interface HeroProps {
   images: string[];
@@ -26,7 +26,7 @@ export default function Hero({ images, title, subtitle }: HeroProps) {
         {images.map((image, index) => (
           <div
             key={index}
-            className="absolute inset-0 bg-cover bg-center grayscale transition-opacity duration-1000"
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
             style={{
               backgroundImage: `url('${image}')`,
               opacity: index === currentIndex ? 1 : 0,
@@ -42,14 +42,14 @@ export default function Hero({ images, title, subtitle }: HeroProps) {
       <div className="relative z-10 flex flex-col justify-end min-h-screen px-4 sm:px-8 md:px-16 pb-12 md:pb-16">
         <div className="max-w-6xl mx-auto w-full">
           {/* Two-column layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-16">
             <div className="flex flex-col justify-end">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-white leading-[1.1] tracking-tight">
                 {title}
               </h1>
             </div>
             <div className="flex flex-col justify-end">
-              <p className="text-sm md:text-base text-white/80 font-light leading-relaxed max-w-md lg:ml-auto">
+              <p className="text-sm md:text-base text-white/80 font-light leading-relaxed max-w-lg">
                 {subtitle}
               </p>
             </div>
@@ -63,10 +63,14 @@ export default function Hero({ images, title, subtitle }: HeroProps) {
                   href="https://kyrah.in"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/60 hover:text-white transition-colors"
-                  aria-label="Website"
+                  className="text-white/60 hover:text-white transition-colors flex items-center"
+                  aria-label="Kyrah Studio"
                 >
-                  <WebsiteIcon size={20} color="currentColor" />
+                  <img
+                    src="/kyrahlogo.png"
+                    alt="Kyrah Studio"
+                    className="w-5 h-auto object-contain"
+                  />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/rishika-miranda-163260329/"

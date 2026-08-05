@@ -1,4 +1,4 @@
-import { WebsiteIcon, LinkedinIcon, InstagramIcon } from '@/components/icons';
+import { LinkedinIcon, InstagramIcon } from '@/components/icons';
 
 export default function Footer() {
   return (
@@ -11,10 +11,14 @@ export default function Footer() {
           href="https://kyrah.in"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#6b5f58] hover:text-[#1a1a1a] transition-colors"
-          aria-label="Website"
+          className="text-[#6b5f58] hover:text-[#1a1a1a] transition-colors flex items-center"
+          aria-label="Kyrah Studio"
         >
-          <WebsiteIcon size={16} />
+          <img
+            src="/kyrahlogo.png"
+            alt="Kyrah Studio"
+            className="w-4 h-auto object-contain"
+          />
         </a>
         <a
           href="https://www.linkedin.com/in/rishika-miranda-163260329/"

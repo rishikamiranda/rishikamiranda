@@ -2,22 +2,21 @@ import Link from 'next/link';
 
 export default function About() {
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
-      <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
+    <section className="max-w-6xl mx-auto px-4 sm:px-8 py-20 md:py-20 w-full">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-12 items-center md:items-start">
         {/* LEFT: Square Portrait */}
-        <div className="md:w-[40%] flex justify-center md:justify-start">
-          <div className="w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 overflow-hidden border-2 border-[#e0e0e0] flex-shrink-0">
+        <div className="flex justify-center md:justify-start flex-shrink-0">
+          <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 lg:w-60 lg:h-60 overflow-hidden border-2 border-[#e0e0e0] flex-shrink-0">
             <img
               src="/rishika.jpeg"
               alt="Rishika Miranda"
-              className="w-full h-full object-cover grayscale"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
 
         {/* RIGHT: Text Content */}
-        <div className="md:w-[60%] flex flex-col">
-          <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b] mb-4">About</span>
+        <div className="flex flex-col flex-1 md:min-w-0">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#1a1a1a] leading-tight mb-6">
             Hi, I am Rishika
           </h2>

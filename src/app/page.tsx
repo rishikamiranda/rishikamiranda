@@ -5,10 +5,10 @@ import About from '@/components/home/About';
 import Work from '@/components/home/Work';
 import { getAllJournalEntries } from '@/actions/journal-entries';
 import { getAllLists } from '@/actions/lists';
-import { 
-  getJournalCategoryDisplayName, 
+import {
+  getJournalCategoryDisplayName,
   getListCategoryDisplayName,
-  type List 
+  type List
 } from '@/types';
 
 
@@ -22,7 +22,7 @@ const heroImages: string[] = [
 export default async function HomePage() {
   const allEntries = await getAllJournalEntries();
   const journalEntries = allEntries.slice(0, 5);
-  
+
   const allLists = await getAllLists();
   const recentLists = allLists.slice(0, 4);
 
@@ -59,9 +59,9 @@ export default async function HomePage() {
       {/* JOURNAL SECTION */}
       <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
         <div className="mb-12">
-          <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">Journal</span>
+          <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]"></span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#1a1a1a] leading-tight mt-2">
-            <span className="font-medium">Reflections </span> &amp; Resources
+            Journal
           </h2>
         </div>
         <div className="space-y-4">
@@ -79,7 +79,7 @@ export default async function HomePage() {
                 {/* Background image – hidden by default, appears on hover */}
                 {heroImage && (
                   <div
-                    className="absolute inset-0 z-0 bg-cover bg-center opacity-0 group-hover:opacity-10 transition-opacity duration-700 grayscale"
+                    className="absolute inset-0 z-0 bg-cover bg-center opacity-0 group-hover:opacity-10 transition-opacity duration-700"
                     style={{ backgroundImage: `url('${heroImage}')` }}
                   />
                 )}
@@ -138,9 +138,8 @@ export default async function HomePage() {
       {/* LISTS SECTION – Gallery Grid */}
       <section className="max-w-6xl mx-auto px-4 sm:px-8 py-16 md:py-20 w-full">
         <div className="mb-12">
-          <span className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b]">Lists</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#1a1a1a] leading-tight mt-2">
-            Curated <span className="font-medium">Collections</span>
+Resources
           </h2>
         </div>
 
@@ -159,7 +158,7 @@ export default async function HomePage() {
                     <img
                       src={list.cover_image}
                       alt={list.title}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
+                      className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-[#6b6b6b] text-sm">
@@ -186,60 +185,18 @@ export default async function HomePage() {
             ))}
           </div>
         )}
-        
-        <div className="text-left mt-8">
+
+        <div className="text-right mt-8">
           <Link
             href="/lists"
             className="text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
           >
-            All Lists →
+            All Resources →
           </Link>
         </div>
       </section>
 
-      {/* CONTACT DIALOG */}
-      <dialog
-        id="contactDialog"
-        className="rounded-none border border-[#d0d0d0] shadow-2xl p-10 max-w-md w-full backdrop:bg-black/30 open:flex open:flex-col open:gap-6 bg-white"
-      >
-        <form method="dialog" className="flex flex-col gap-6">
-          <div>
-            <h3 className="text-2xl font-light text-[#1a1a1a] tracking-wide">Let's collaborate</h3>
-            <p className="text-sm text-[#4a4a4a] font-light mt-1">Tell me about your project or idea.</p>
-          </div>
-          <div className="space-y-4">
-            <input
-              type="text"
-              placeholder="Your name"
-              className="w-full border-b border-[#d0d0d0] bg-transparent py-2 text-sm focus:outline-none focus:border-[#1a1a1a] transition-colors placeholder:text-[#a0a0a0] font-light"
-            />
-            <input
-              type="email"
-              placeholder="Your email"
-              className="w-full border-b border-[#d0d0d0] bg-transparent py-2 text-sm focus:outline-none focus:border-[#1a1a1a] transition-colors placeholder:text-[#a0a0a0] font-light"
-            />
-            <textarea
-              rows={3}
-              placeholder="Brief description..."
-              className="w-full border-b border-[#d0d0d0] bg-transparent py-2 text-sm focus:outline-none focus:border-[#1a1a1a] transition-colors placeholder:text-[#a0a0a0] font-light resize-none"
-            />
-          </div>
-          <div className="flex justify-end gap-4 mt-2">
-            <button
-              type="button"
-              className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors font-light"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="text-[10px] tracking-[0.2em] uppercase text-white bg-[#1a1a1a] px-6 py-2 hover:bg-[#3a3a3a] transition-colors font-light"
-            >
-              Send Message
-            </button>
-          </div>
-        </form>
-      </dialog>
+      
     </>
   );
 }

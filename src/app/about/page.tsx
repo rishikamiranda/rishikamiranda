@@ -4,11 +4,14 @@ export default function AboutPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-8">
       {/* HERO HEADER SECTION */}
-      <section className="pt-20 pb-12 md:pt-10 md:pb-10 w-full ">
-        <h1 className="text-5xl sm:text-7xl md:text-8xl font-light leading-none tracking-tight">
-          More<br />
-          <span className="font-medium">about me.</span>
-        </h1>
+      <section className="pt-20  md:pt-10  w-full ">
+        <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 lg:w-60 lg:h-60 overflow-hidden flex-shrink-0">
+            <img
+              src="/rishika.jpeg"
+              alt="Rishika Miranda"
+              className="w-full h-full object-cover"
+            />
+          </div>
       </section>
 
       {/* BIOGRAPHY NARRATIVE CORE */}
@@ -39,22 +42,9 @@ export default function AboutPage() {
             Five years into this journey, what continues to drive my work is the endless opportunity to keep learning—translating architectural theory into tangible, human-centric forms.
           </p>
 
-          {/* Core Focus Section */}
-          <div className="pt-8">
-            <div className="mb-4">
-              <span className="step-line w-6 mb-3 ml-auto" />
-              <h2 className="text-xs font-bold uppercase tracking-widest text-[#6b5f58]">Core Focus</h2>
-            </div>
-            <ul className="grid grid-cols-2 gap-2 text-xs text-[#6b5f58]">
-              <li className="">• Built Environment</li>
-              <li className="">• Interior Design</li>
-              <li className="">• Product Design</li>
-              <li className="">• Artisanal Collaboration</li>
-            </ul>
-          </div>
 
           {/* Chronological Timeline Modules */}
-          <div className="pt-8 space-y-12 border-t border-[#e5e0db] mt-8">
+          <div className="pt-8 space-y-12 mt-8">
             
             {/* Education Section */}
             <div>
@@ -79,16 +69,8 @@ export default function AboutPage() {
               </div>
               <ul className="space-y-4 text-xs leading-relaxed">
                 <li className="border-b border-[#e5e0db] pb-3">
-                  <span className="block font-bold text-[#6b5f58]">Awards Tier</span>
+                  <span className="block font-bold text-[#6b5f58]">Awards </span>
                   National Architecture and Interior Design Awards citation.
-                  <a
-                    href="https://kyrah.in"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#a67c52] inline-block ml-1 hover:underline"
-                  >
-                    Artifact View →
-                  </a>
                 </li>
                 <li className="border-b border-[#e5e0db] pb-3">
                   <span className="block font-bold text-[#6b5f58]">Press Feature</span>
@@ -110,10 +92,10 @@ export default function AboutPage() {
       </section>
 
       {/* COLLABORATION GRID */}
-      <section className="py-16 md:py-20 w-full border-t border-[#e5e0db]">
+      <section className="py-16 md:py-20 w-full">
         <div className="mb-12">
           <span className="step-line w-8 mb-6 ml-auto" />
-          <h2 className="text-3xl md:text-4xl font-light text-[#1a1a1a]">Ways to <span className="font-medium">Collaborate</span></h2>
+          <h2 className="text-3xl md:text-4xl font-light text-[#1a1a1a]">Ways to Collaborate</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#e5e0db] border border-[#e5e0db]">
@@ -124,9 +106,15 @@ export default function AboutPage() {
               <span className="text-xs tracking-widest uppercase text-[#6b5f58] font-bold">01</span>
               <span className="step-line w-10 group-hover:w-16 transition-all duration-300" />
             </div>
-            <h3 className="text-xl font-light text-[#1a1a1a] mb-4">Hire the Studio</h3>
+            <h3 className="text-xl font-light text-[#1a1a1a] mb-4">
+              <a href="https://kyrah.in"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                    Hire the Studio
+                    </a>
+                    </h3>
             <p className="text-xs leading-relaxed text-[#6b5f58]">
-              Available for full-service architecture, residential master planning, and premium custom interior studio projects.
+              Architecture, master planning and highly customised residential and interior design projects through Kyrah Design Studio.
             </p>
           </div>
           
