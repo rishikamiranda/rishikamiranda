@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Work() {
   return (
@@ -10,7 +11,15 @@ export default function Work() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
         {/* 01. Architecture & Interiors */}
-        <div className="border-t border-[#e0e0e0] pt-6">
+        <div className="pt-6">
+          <div className="relative w-full h-48 mb-4 overflow-hidden rounded-md">
+            <Image
+              src="/services/interior.webp"
+              alt="Architecture & Interiors"
+              fill
+              className="object-cover"
+            />
+          </div>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-[10px] tracking-[0.2em] text-[#6b6b6b] font-medium">01</span>
           </div>
@@ -21,7 +30,15 @@ export default function Work() {
         </div>
 
         {/* 02. Furniture & Product Design */}
-        <div className="border-t border-[#e0e0e0] pt-6">
+        <div className="pt-6">
+          <div className="relative w-full h-48 mb-4 overflow-hidden rounded-md">
+            <Image
+              src="/services/furniture.webp"
+              alt="Furniture & Product Design"
+              fill
+              className="object-cover"
+            />
+          </div>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-[10px] tracking-[0.2em] text-[#6b6b6b] font-medium">02</span>
           </div>
@@ -32,7 +49,15 @@ export default function Work() {
         </div>
 
         {/* 03. Experience Curation */}
-        <div className="border-t border-[#e0e0e0] pt-6">
+        <div className="pt-6">
+          <div className="relative w-full h-48 mb-4 overflow-hidden rounded-md">
+            <Image
+              src="/services/experience.webp"
+              alt="Experience Curation"
+              fill
+              className="object-cover"
+            />
+          </div>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-[10px] tracking-[0.2em] text-[#6b6b6b] font-medium">03</span>
           </div>
