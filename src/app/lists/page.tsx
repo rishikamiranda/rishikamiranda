@@ -1,8 +1,6 @@
-// src/app/lists/page.tsx
 import Link from 'next/link';
 import { getAllLists } from '@/actions/lists';
 import { type List, type ListCategory, getListCategoryDisplayName } from '@/types';
-
 
 export default async function ListsIndexPage() {
   const lists = await getAllLists();
@@ -21,7 +19,9 @@ export default async function ListsIndexPage() {
       </h1>
 
       {Object.keys(groupedLists).length === 0 ? (
-        <p className="text-[#6b6b6b] text-center py-12">A collection of useful things is taking shape. More soon.</p>
+        <p className="text-[#6b6b6b] text-center py-12">
+          A collection of useful things is taking shape. More soon.
+        </p>
       ) : (
         Object.entries(groupedLists).map(([category, items]) => (
           <div key={category} className="mb-12">
@@ -32,10 +32,16 @@ export default async function ListsIndexPage() {
               {(items as List[]).map((list: List) => (
                 <Link
                   key={list.id}
-                  href={`/lists/${list.category}/${list.slug}`}
+                  href={
+                    list.type === 'external'
+                      ? list.external_url || '#'
+                      : `/lists/${list.category}/${list.slug}`
+                  }
+                  target={list.type === 'external' ? '_blank' : undefined}
+                  rel={list.type === 'external' ? 'noopener noreferrer' : undefined}
                   className="group block"
                 >
-                  <div className="aspect-[4/3] bg-[#f5f5f5] overflow-hidden">
+                  <div className="aspect-[4/3] bg-[#f5f5f5] overflow-hidden relative">
                     {list.cover_image ? (
                       <img
                         src={list.cover_image}
@@ -46,6 +52,11 @@ export default async function ListsIndexPage() {
                       <div className="w-full h-full flex items-center justify-center text-[#6b6b6b] text-sm">
                         No image
                       </div>
+                    )}
+                    {list.type === 'external' && (
+                      <span className="absolute top-2 right-2 text-[10px] uppercase tracking-wider bg-white/90 px-2 py-1 rounded text-[#1a1a1a]">
+                        ↗ External
+                      </span>
                     )}
                   </div>
                   <div className="mt-3">

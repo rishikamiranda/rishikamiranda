@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
-import { type List, type ListCategory, type ListItem } from '@/types';
+import { type List, type ListCategory, type ListItem, type ListType } from '@/types';
 
 type ListInput = {
   title: string;
@@ -12,6 +12,8 @@ type ListInput = {
   cover_image?: string | null;
   category: ListCategory;
   published?: boolean;
+  type?: ListType;                 // NEW
+  external_url?: string | null;    // NEW
 };
 
 type ListItemInput = {
@@ -35,7 +37,7 @@ export async function getAllLists(): Promise<List[]> {
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    return data || [];
+    return (data || []) as List[];
   } catch (error) {
     console.error('Error fetching lists:', error);
     return [];
@@ -53,7 +55,7 @@ export async function getListBySlug(slug: string): Promise<List | null> {
       .single();
 
     if (error) throw error;
-    return data;
+    return data as List;
   } catch (error) {
     console.error('Error fetching list:', error);
     return null;
@@ -87,7 +89,7 @@ export async function getListsByCategory(category: ListCategory): Promise<List[]
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    return data || [];
+    return (data || []) as List[];
   } catch (error) {
     console.error(`Error fetching lists for category ${category}:`, error);
     return [];
@@ -129,6 +131,11 @@ export async function getListWithItems(slug: string) {
       return null;
     }
 
+    // If external list, don't fetch items
+    if (list.type === 'external') {
+      return { ...list, items: [] };
+    }
+
     const { data: items, error: itemsError } = await supabase
       .from('list_items')
       .select('*')
@@ -161,7 +168,7 @@ export async function getAllListsForAdmin(): Promise<List[]> {
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    return data || [];
+    return (data || []) as List[];
   } catch (error) {
     console.error('Error fetching all lists:', error);
     return [];

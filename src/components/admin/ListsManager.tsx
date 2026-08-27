@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
+import {
   getAllListsForAdmin,
   createList,
   updateList,
@@ -12,14 +12,15 @@ import {
 } from '@/actions/lists';
 import { uploadListImage, deleteListImage, type UploadedImage } from '@/lib/supabase/storage';
 import ImageUpload from './ImageUpload';
-import { 
-  type List, 
-  type ListCategory, 
+import {
+  type List,
+  type ListCategory,
   type ListItem,
+  type ListType,
   LIST_CATEGORIES,
   LIST_CATEGORY_NAMES,
 } from '@/types';
-import { Pencil, Trash2, Plus, X, Link2, Unlink } from 'lucide-react';
+import { Pencil, Trash2, Plus, X, Link2, Unlink, ExternalLink } from 'lucide-react';
 
 export default function ListsManager() {
   const [lists, setLists] = useState<List[]>([]);
@@ -37,6 +38,8 @@ export default function ListsManager() {
     cover_image: string;
     category: ListCategory;
     published: boolean;
+    type: ListType;
+    external_url: string;
   }>({
     title: '',
     slug: '',
@@ -45,6 +48,8 @@ export default function ListsManager() {
     cover_image: '',
     category: 'shopping',
     published: false,
+    type: 'internal',
+    external_url: '',
   });
 
   const fetchData = async () => {
@@ -101,6 +106,8 @@ export default function ListsManager() {
         cover_image: form.cover_image || null,
         category: form.category,
         published: form.published,
+        type: form.type,
+        external_url: form.external_url || null,
       };
 
       let result;
@@ -182,6 +189,8 @@ export default function ListsManager() {
       cover_image: '',
       category: 'shopping',
       published: false,
+      type: 'internal',
+      external_url: '',
     });
   };
 
@@ -196,6 +205,8 @@ export default function ListsManager() {
       cover_image: list.cover_image || '',
       category: list.category as ListCategory,
       published: list.published || false,
+      type: list.type,
+      external_url: list.external_url || '',
     });
   };
 
@@ -298,6 +309,32 @@ export default function ListsManager() {
           </div>
 
           <div className="mb-4">
+            <label className="block text-xs uppercase tracking-wider text-[#6b6b6b] mb-1">List Type</label>
+            <select
+              value={form.type}
+              onChange={(e) => setForm({ ...form, type: e.target.value as ListType })}
+              className="w-full border-b border-[#d0d0d0] py-1 focus:outline-none focus:border-[#1a1a1a]"
+            >
+              <option value="internal">Internal (with items)</option>
+              <option value="external">External (link only)</option>
+            </select>
+          </div>
+
+          {form.type === 'external' && (
+            <div className="mb-4">
+              <label className="block text-xs uppercase tracking-wider text-[#6b6b6b] mb-1">External URL *</label>
+              <input
+                type="url"
+                value={form.external_url}
+                onChange={(e) => setForm({ ...form, external_url: e.target.value })}
+                className="w-full border-b border-[#d0d0d0] py-1 focus:outline-none focus:border-[#1a1a1a]"
+                placeholder="https://pinterest.com/..."
+                required={form.type === 'external'}
+              />
+            </div>
+          )}
+
+          <div className="mb-4">
             <label className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
@@ -367,6 +404,7 @@ export default function ListsManager() {
               <tr className="border-b border-[#e0e0e0]">
                 <th className="py-2 text-sm font-light uppercase tracking-wider">Title</th>
                 <th className="py-2 text-sm font-light uppercase tracking-wider">Category</th>
+                <th className="py-2 text-sm font-light uppercase tracking-wider">Type</th>
                 <th className="py-2 text-sm font-light uppercase tracking-wider">Published</th>
                 <th className="py-2 text-sm font-light uppercase tracking-wider">Items</th>
                 <th className="py-2 text-sm font-light uppercase tracking-wider">Actions</th>
@@ -390,23 +428,45 @@ export default function ListsManager() {
                     </td>
                     <td className="py-3">
                       <span className={`text-xs px-2 py-1 rounded ${
+                        list.type === 'external' 
+                          ? 'bg-blue-100 text-blue-700' 
+                          : 'bg-gray-100 text-gray-600'
+                      }`}>
+                        {list.type === 'external' ? 'External' : 'Internal'}
+                      </span>
+                    </td>
+                    <td className="py-3">
+                      <span className={`text-xs px-2 py-1 rounded ${
                         list.published ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'
                       }`}>
                         {list.published ? 'Published' : 'Draft'}
                       </span>
                     </td>
                     <td className="py-3">
-                      <span className="text-sm">{listItems.length} items</span>
+                      {list.type === 'external' ? (
+                        <a
+                          href={list.external_url || '#'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-blue-500 hover:underline inline-flex items-center gap-1"
+                        >
+                          <ExternalLink size={14} /> View Link
+                        </a>
+                      ) : (
+                        <span className="text-sm">{listItems.length} items</span>
+                      )}
                     </td>
                     <td className="py-3">
                       <div className="flex gap-2">
-                        <button
-                          onClick={() => setSelectedListId(selectedListId === list.id ? null : list.id)}
-                          className="p-1.5 text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
-                          title={selectedListId === list.id ? 'Hide Items' : 'Manage Items'}
-                        >
-                          <Link2 size={16} />
-                        </button>
+                        {list.type === 'internal' && (
+                          <button
+                            onClick={() => setSelectedListId(selectedListId === list.id ? null : list.id)}
+                            className="p-1.5 text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
+                            title={selectedListId === list.id ? 'Hide Items' : 'Manage Items'}
+                          >
+                            <Link2 size={16} />
+                          </button>
+                        )}
                         <button
                           onClick={() => startEdit(list)}
                           className="p-1.5 text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
@@ -431,7 +491,7 @@ export default function ListsManager() {
         </div>
       )}
 
-      {/* Item Management Section */}
+      {/* Item Management Section - only for internal lists */}
       {selectedListId && (
         <div className="mt-8 border-t border-[#e0e0e0] pt-6">
           <div className="flex justify-between items-center mb-4">

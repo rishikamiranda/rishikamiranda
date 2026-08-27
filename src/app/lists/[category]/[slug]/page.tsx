@@ -25,6 +25,39 @@ export default async function ListDetailPage({
     notFound();
   }
 
+  // External list: just show a button/link
+  if (list.type === 'external') {
+    return (
+      <div className="max-w-5xl mx-auto px-4 py-12 sm:py-16">
+        <Link
+          href={`/lists/${category}`}
+          className="text-[10px] tracking-[0.2em] uppercase text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
+        >
+          ← Back to {category.replace('-', ' ')}
+        </Link>
+
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#1a1a1a] mt-4 mb-2">
+          {list.title}
+        </h1>
+        {list.description && (
+          <p className="text-[#6b6b6b] text-lg font-light mb-8">{list.description}</p>
+        )}
+
+        <div className="mt-8">
+          <a
+            href={list.external_url || '#'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[#1a1a1a] text-white px-6 py-3 rounded hover:bg-[#333] transition-colors"
+          >
+            Visit External Board ↗
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // Internal list: show items
   return (
     <div className="max-w-5xl mx-auto px-4 py-12 sm:py-16">
       <Link

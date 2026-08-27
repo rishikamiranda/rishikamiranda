@@ -10,10 +10,43 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.5"
+    PostgrestVersion: "14.17"
   }
   public: {
     Tables: {
+      contacts: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          message: string
+          name: string
+          status: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          message: string
+          name: string
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       journal_entries: {
         Row: {
           author: string | null
@@ -128,10 +161,12 @@ export type Database = {
           cover_image: string | null
           created_at: string | null
           description: string | null
+          external_url: string | null
           id: string
           published: boolean | null
           slug: string
           title: string
+          type: string
           updated_at: string | null
           user_id: string | null
         }
@@ -141,10 +176,12 @@ export type Database = {
           cover_image?: string | null
           created_at?: string | null
           description?: string | null
+          external_url?: string | null
           id?: string
           published?: boolean | null
           slug: string
           title: string
+          type?: string
           updated_at?: string | null
           user_id?: string | null
         }
@@ -154,10 +191,12 @@ export type Database = {
           cover_image?: string | null
           created_at?: string | null
           description?: string | null
+          external_url?: string | null
           id?: string
           published?: boolean | null
           slug?: string
           title?: string
+          type?: string
           updated_at?: string | null
           user_id?: string | null
         }

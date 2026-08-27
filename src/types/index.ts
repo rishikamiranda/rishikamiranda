@@ -1,6 +1,13 @@
 import { Database } from '@/types/supabase';
 
-export type List = Database['public']['Tables']['lists']['Row'];
+type ListRow = Database['public']['Tables']['lists']['Row'];
+
+// Override `type` to be a union, keep everything else
+export type List = Omit<ListRow, 'type'> & { type: ListType };
+
+export type ListType = 'internal' | 'external';
+
+
 export type ListItem = Database['public']['Tables']['list_items']['Row'];
 export type ListCategory = 'shopping' | 'style-guide';
 
@@ -49,3 +56,4 @@ export function isJournalCategory(category: string): category is JournalCategory
 // Alias for backward compatibility
 export const ALL_CATEGORIES = JOURNAL_CATEGORIES; // Changed to JOURNAL_CATEGORIES
 export const categoryDisplayNames = JOURNAL_CATEGORY_NAMES; // Changed to JOURNAL_CATEGORY_NAMES
+
