@@ -3,15 +3,6 @@ import Link from 'next/link';
 import { getListWithItems, getListSlugs } from '@/actions/lists';
 import { type ListItem } from '@/types';
 
-export const revalidate = 3600;
-
-export async function generateStaticParams() {
-  const slugs = await getListSlugs();
-  return slugs.map(({ slug, category }) => ({
-    category: category,
-    slug: slug,
-  }));
-}
 
 export default async function ListDetailPage({
   params,
