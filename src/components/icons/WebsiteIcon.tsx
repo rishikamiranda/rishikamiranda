@@ -1,12 +1,12 @@
 import { Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface IconProps {
+export interface IconProps {
   className?: string;
   size?: number;
   color?: string;
 }
 
-export function WebsiteIcon({ className, size = 18, color = 'currentColor' }: IconProps) {
+export function WebsiteIcon({ className, size = 18, color = '#64748B' }: IconProps) {
   return <Globe className={cn(className)} size={size} color={color} strokeWidth={1.5} />;
 }
