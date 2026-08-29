@@ -44,7 +44,7 @@ export default function Hero({ images, title, subtitle }: HeroProps) {
           {/* Two-column layout */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-16">
             <div className="flex flex-col justify-end">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-white leading-[1.1] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl max-w-3xl font-light text-white leading-[1.1] tracking-tight">
                 {title}
               </h1>
             </div>
