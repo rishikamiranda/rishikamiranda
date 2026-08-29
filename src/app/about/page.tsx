@@ -31,7 +31,7 @@ export default function AboutPage() {
           </p>
           
           <p>
-            Over the past five years, my practice has evolved around a hands-on approach to spatial coordination, deep material exploration, and structural execution. I bridge the gap between abstract design vision and physical reality by working closely on-site alongside master craftsmen, contractors, and technical vendors.
+            Over a decade into this journey, my practice has evolved around a hands-on approach to spatial coordination, deep material exploration, and structural execution. I bridge the gap between abstract design vision and physical reality by working closely on-site alongside master craftsmen, contractors, and technical vendors.
           </p>
 
           <p>
@@ -92,80 +92,98 @@ export default function AboutPage() {
       </section>
 
       {/* COLLABORATION GRID */}
-      <section className="py-16 md:py-20 w-full">
-        <div className="mb-12">
-          <span className="step-line w-8 mb-6 ml-auto" />
-          <h2 className="text-3xl md:text-4xl font-light text-[#1a1a1a]">Ways to Collaborate</h2>
-        </div>
+<section className="py-16 md:py-20 w-full">
+  <div className="mb-12">
+    <span className="step-line w-8 mb-6 ml-auto" />
+    <h2 className="text-3xl md:text-4xl font-light text-[#1a1a1a]">Ways to Collaborate</h2>
+  </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#e5e0db] border border-[#e5e0db]">
-          
-          {/* 01. Hire the Studio */}
-          <div className="bg-white p-8 group transition-colors duration-300 hover:bg-[#fafafa]">
-            <div className="flex items-center gap-4 mb-6 justify-end">
-              <span className="text-xs tracking-widest uppercase text-[#6b5f58] font-bold">01</span>
-              <span className="step-line w-10 group-hover:w-16 transition-all duration-300" />
-            </div>
-            <h3 className="text-xl font-light text-[#1a1a1a] mb-4">
-              <a href="https://kyrah.in"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                    Hire the Studio
-                    </a>
-                    </h3>
-            <p className="text-xs leading-relaxed text-[#6b5f58]">
-              Architecture, master planning and highly customised residential and interior design projects through Kyrah Design Studio.
-            </p>
-          </div>
-          
-          {/* 02. Creative Collaborations */}
-          <div className="bg-white p-8 group transition-colors duration-300 hover:bg-[#fafafa]">
-            <div className="flex items-center gap-4 mb-6 justify-end">
-              <span className="text-xs tracking-widest uppercase text-[#6b5f58] font-bold">02</span>
-              <span className="step-line w-10 group-hover:w-16 transition-all duration-300" />
-            </div>
-            <h3 className="text-xl font-light text-[#1a1a1a] mb-4">Creative Collaborations</h3>
-            <p className="text-xs leading-relaxed text-[#6b5f58]">
-              Partnering with independent artists, design houses, creative consulting requests, or curated physical experiences on a personal level.
-            </p>
-          </div>
-          
-          {/* 03. Resources */}
-          <div className="bg-white p-8 group transition-colors duration-300 hover:bg-[#fafafa]">
-            <div className="flex items-center gap-4 mb-6 justify-end">
-              <span className="text-xs tracking-widest uppercase text-[#6b5f58] font-bold">03</span>
-              <span className="step-line w-10 group-hover:w-16 transition-all duration-300" />
-            </div>
-            <h3 className="text-xl font-light text-[#1a1a1a] mb-4">Resources</h3>
-            <p className="text-xs leading-relaxed text-[#6b5f58]">
-              Interior architectural blueprints, technical documentation checklists, mood boards, and open-source knowledge frameworks.
-            </p>
-          </div>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#e5e0db] border border-[#e5e0db]">
+    
+    {/* 01. Hire the Studio */}
+    <div className="bg-white p-8 group transition-colors duration-300 hover:bg-[#fafafa]">
+      <div className="flex items-center gap-4 mb-6 justify-end">
+        <span className="text-xs tracking-widest uppercase text-[#6b5f58] font-bold">01</span>
+        <span className="step-line w-10 group-hover:w-16 transition-all duration-300" />
+      </div>
+      <h3 className="text-xl font-light text-[#1a1a1a] mb-4">
+        <a 
+          href="https://kyrah.in"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          Hire the Studio
+        </a>
+      </h3>
+      <p className="text-xs leading-relaxed text-[#6b5f58]">
+        Architecture, master planning and highly customised residential and interior design projects through Kyrah Design Studio.
+      </p>
+    </div>
+    
+    {/* 02. Creative Collaborations */}
+    <div className="bg-white p-8 group transition-colors duration-300 hover:bg-[#fafafa]">
+      <div className="flex items-center gap-4 mb-6 justify-end">
+        <span className="text-xs tracking-widest uppercase text-[#6b5f58] font-bold">02</span>
+        <span className="step-line w-10 group-hover:w-16 transition-all duration-300" />
+      </div>
+      <h3 className="text-xl font-light text-[#1a1a1a] mb-4">
+        <Link href="/contact" className="hover:underline">
+          Creative Collaborations
+        </Link>
+      </h3>
+      <p className="text-xs leading-relaxed text-[#6b5f58]">
+        Partnering with independent artists, design houses, creative consulting requests, or curated physical experiences on a personal level.
+      </p>
+    </div>
+    
+    {/* 03. Resources */}
+    <div className="bg-white p-8 group transition-colors duration-300 hover:bg-[#fafafa]">
+      <div className="flex items-center gap-4 mb-6 justify-end">
+        <span className="text-xs tracking-widest uppercase text-[#6b5f58] font-bold">03</span>
+        <span className="step-line w-10 group-hover:w-16 transition-all duration-300" />
+      </div>
+      <h3 className="text-xl font-light text-[#1a1a1a] mb-4">
+        <Link href="/links" className="hover:underline">
+          Resources
+        </Link>
+      </h3>
+      <p className="text-xs leading-relaxed text-[#6b5f58]">
+        Interior architectural blueprints, technical documentation checklists, mood boards, and open-source knowledge frameworks.
+      </p>
+    </div>
 
-          {/* 04. Shop */}
-          <div className="bg-white p-8 group transition-colors duration-300 hover:bg-[#fafafa]">
-            <div className="flex items-center gap-4 mb-6 justify-end">
-              <span className="text-xs tracking-widest uppercase text-[#6b5f58] font-bold">04</span>
-              <span className="step-line w-10 group-hover:w-16 transition-all duration-300" />
-            </div>
-            <h3 className="text-xl font-light text-[#1a1a1a] mb-4">Shop</h3>
-            <p className="text-xs leading-relaxed text-[#6b5f58]">
-              A curated collection of intentionally designed furniture items, functional objects, graphics, and custom studio artifacts.
-            </p>
-          </div>
+    {/* 04. Shop (Disabled) */}
+    <div className="bg-white p-8 group transition-colors duration-300 opacity-75">
+      <div className="flex items-center gap-4 mb-6 justify-end">
+        <span className="text-xs tracking-widest uppercase text-[#6b5f58] font-bold">04</span>
+        <span className="step-line w-10" />
+      </div>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-xl font-light text-[#1a1a1a] opacity-60 cursor-not-allowed">
+          Shop
+        </h3>
+        <span className="text-[9px] tracking-widest uppercase bg-[#f5f2ef] text-[#6b5f58] px-2 py-1 rounded">
+          Coming Soon
+        </span>
+      </div>
+      <p className="text-xs leading-relaxed text-[#6b5f58] opacity-80">
+        A curated collection of intentionally designed furniture items, functional objects, graphics, and custom studio artifacts.
+      </p>
+    </div>
 
-        </div>
+  </div>
 
-        {/* Contact Link Below Cards */}
-        <div className="mt-12 flex justify-end">
-          <Link
-            href="/contact"
-            className="text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
-          >
-            Get in Touch →
-          </Link>
-        </div>
-      </section>
+  {/* Contact Link Below Cards */}
+  <div className="mt-12 flex justify-end">
+    <Link
+      href="/contact"
+      className="text-[10px] tracking-[0.2em] uppercase text-[#1a1a1a] hover:text-[#6b6b6b] transition-colors border-b border-[#1a1a1a] pb-1"
+    >
+      Get in Touch →
+    </Link>
+  </div>
+</section>
     </main>
   );
 }

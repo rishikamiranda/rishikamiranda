@@ -79,7 +79,7 @@ export default function Hero({ images, title, subtitle }: HeroProps) {
                   className="text-white/60 hover:text-white transition-colors"
                   aria-label="LinkedIn"
                 >
-                  <LinkedinIcon size={20} color="currentColor" />
+                  <LinkedinIcon size={20} />
                 </a>
                 <a
                   href="https://www.instagram.com/rishikamiranda/"
@@ -88,7 +88,7 @@ export default function Hero({ images, title, subtitle }: HeroProps) {
                   className="text-white/60 hover:text-white transition-colors"
                   aria-label="Instagram"
                 >
-                  <InstagramIcon size={20} color="currentColor" />
+                  <InstagramIcon size={20} />
                 </a>
               </div>
             </div>
