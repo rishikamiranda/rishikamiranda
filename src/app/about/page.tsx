@@ -144,7 +144,7 @@ export default function AboutPage() {
         <span className="step-line w-10 group-hover:w-16 transition-all duration-300" />
       </div>
       <h3 className="text-xl font-light text-[#1a1a1a] mb-4">
-        <Link href="/links" className="hover:underline">
+        <Link href="/lists" className="hover:underline">
           Resources
         </Link>
       </h3>
