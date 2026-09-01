@@ -67,7 +67,7 @@ export default async function ListCategoryPage({
                   </div>
                 )}
                 {list.type === 'external' && (
-                  <span className="absolute top-2 right-2 text-[10px] uppercase tracking-wider bg-white/90 px-2 py-1 rounded text-[#1a1a1a]">
+                  <span className="absolute top-2 right-2 text-[10px] uppercase tracking-wider bg-white/90 px-2 py-1 rounded text-[#1a1a1a] flex items-center gap-1">
                     ↗ External
                   </span>
                 )}
@@ -78,6 +78,19 @@ export default async function ListCategoryPage({
                 </h3>
                 {list.description && (
                   <p className="text-sm text-[#6b6b6b] font-light">{list.description}</p>
+                )}
+                {/* Tags */}
+                {list.tags && list.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {list.tags.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[10px] uppercase tracking-wider text-[#6b6b6b] bg-[#f0f0f0] px-2 py-0.5 rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 )}
               </div>
             </Link>
