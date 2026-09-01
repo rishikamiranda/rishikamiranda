@@ -14,6 +14,7 @@ type ListInput = {
   published?: boolean;
   type?: ListType;                 // NEW
   external_url?: string | null;    // NEW
+  tags?: string[] | null;            // NEW
 };
 
 type ListItemInput = {

@@ -9,16 +9,16 @@ export type ListType = 'internal' | 'external';
 
 
 export type ListItem = Database['public']['Tables']['list_items']['Row'];
-export type ListCategory = 'shopping' | 'style-guide';
+export type ListCategory = 'shopping' | 'lookbooks';
 
 export type JournalEntry = Database['public']['Tables']['journal_entries']['Row'];
 export type JournalCategory = Database['public']['Enums']['journal_category'];
 
 // List categories
-export const LIST_CATEGORIES: ListCategory[] = ['shopping', 'style-guide'];
+export const LIST_CATEGORIES: ListCategory[] = ['shopping', 'lookbooks'];
 export const LIST_CATEGORY_NAMES: Record<ListCategory, string> = {
   shopping: 'Shopping',
-  'style-guide': 'Style Guide',
+  lookbooks: 'Lookbooks',
 };
 
 // Journal categories

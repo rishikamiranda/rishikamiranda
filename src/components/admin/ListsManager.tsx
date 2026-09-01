@@ -30,6 +30,8 @@ export default function ListsManager() {
   const [uploadingImages, setUploadingImages] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [selectedListId, setSelectedListId] = useState<string | null>(null);
+
+  // Form state – includes "tags" as a comma‑separated string for input
   const [form, setForm] = useState<{
     title: string;
     slug: string;
@@ -40,6 +42,7 @@ export default function ListsManager() {
     published: boolean;
     type: ListType;
     external_url: string;
+    tags: string;
   }>({
     title: '',
     slug: '',
@@ -50,6 +53,7 @@ export default function ListsManager() {
     published: false,
     type: 'internal',
     external_url: '',
+    tags: '',
   });
 
   const fetchData = async () => {
@@ -97,6 +101,12 @@ export default function ListsManager() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Convert tags string to an array (trim and filter empty)
+    const tagsArray = form.tags
+      .split(',')
+      .map(t => t.trim())
+      .filter(Boolean);
+
     try {
       const payload = {
         title: form.title,
@@ -108,6 +118,7 @@ export default function ListsManager() {
         published: form.published,
         type: form.type,
         external_url: form.external_url || null,
+        tags: tagsArray.length ? tagsArray : null,
       };
 
       let result;
@@ -191,6 +202,7 @@ export default function ListsManager() {
       published: false,
       type: 'internal',
       external_url: '',
+      tags: '',
     });
   };
 
@@ -207,6 +219,7 @@ export default function ListsManager() {
       published: list.published || false,
       type: list.type,
       external_url: list.external_url || '',
+      tags: (list.tags || []).join(', '), // convert array to comma‑separated string
     });
   };
 
@@ -335,6 +348,18 @@ export default function ListsManager() {
           )}
 
           <div className="mb-4">
+            <label className="block text-xs uppercase tracking-wider text-[#6b6b6b] mb-1">Tags</label>
+            <input
+              type="text"
+              value={form.tags}
+              onChange={(e) => setForm({ ...form, tags: e.target.value })}
+              className="w-full border-b border-[#d0d0d0] py-1 focus:outline-none focus:border-[#1a1a1a]"
+              placeholder="e.g. summer, minimal, essentials"
+            />
+            <p className="text-xs text-[#6b6b6b] mt-1">Separate tags with commas</p>
+          </div>
+
+          <div className="mb-4">
             <label className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
@@ -419,6 +444,15 @@ export default function ListsManager() {
                       <div>
                         <div className="font-medium">{list.title}</div>
                         <div className="text-xs text-[#6b6b6b]">/{list.slug}</div>
+                        {list.tags && list.tags.length > 0 && (
+                          <div className="flex gap-1 mt-1 flex-wrap">
+                            {list.tags.map((tag, idx) => (
+                              <span key={idx} className="text-xs bg-gray-100 px-2 py-0.5 rounded-full">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     </td>
                     <td className="py-3">
