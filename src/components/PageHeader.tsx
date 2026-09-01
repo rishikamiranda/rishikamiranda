@@ -87,14 +87,7 @@ export default function PageHeader({
                   </div>
                 </>
               )}
-              {readingTime && (
-                <>
-                  <span className="text-white/40">•</span>
-                  <span className="text-[10px] tracking-[0.1em] uppercase">
-                    {readingTime} min read
-                  </span>
-                </>
-              )}
+              
             </div>
           )}
         </div>
