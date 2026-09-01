@@ -43,6 +43,7 @@ export default function JournalManager() {
     tags: string[];
     linkedin_link_url: string;
     featured: boolean;
+    created_at: string; // new field
   }>({
     title: '',
     slug: '',
@@ -57,6 +58,7 @@ export default function JournalManager() {
     tags: [],
     linkedin_link_url: '',
     featured: false,
+    created_at: '', // new field
   });
 
   const fetchEntries = async () => {
@@ -139,20 +141,21 @@ export default function JournalManager() {
 
     try {
       const payload = {
-        title: form.title,
-        slug: form.slug,
-        content: form.content,
-        categories: form.categories.length > 0 ? form.categories : null,
-        published: form.published,
-        cover_image: form.cover_image || null,
-        images: form.images.length > 0 ? form.images : null,
-        description: form.description || null,
-        author: form.author || null,
-        reading_time: form.reading_time || null,
-        tags: form.tags.filter(t => t.trim() !== ''),
-        linkedin_link_url: form.linkedin_link_url || null,
-        featured: form.featured || false,
-      };
+      title: form.title,
+      slug: form.slug,
+      content: form.content,
+      categories: form.categories.length > 0 ? form.categories : null,
+      published: form.published,
+      cover_image: form.cover_image || null,
+      images: form.images.length > 0 ? form.images : null,
+      description: form.description || null,
+      author: form.author || null,
+      reading_time: form.reading_time || null,
+      tags: form.tags.filter(t => t.trim() !== ''),
+      linkedin_link_url: form.linkedin_link_url || null,
+      featured: form.featured || false,
+      created_at: form.created_at || undefined, // 👈 change null to undefined
+    };
 
       let result;
       if (editing) {
@@ -210,6 +213,7 @@ export default function JournalManager() {
       tags: [],
       linkedin_link_url: '',
       featured: false,
+      created_at: '', // reset
     });
   };
 
@@ -231,6 +235,7 @@ export default function JournalManager() {
       tags: entry.tags || [],
       linkedin_link_url: entry.linkedin_link_url || '',
       featured: entry.featured || false,
+      created_at: entry.created_at || '', // set from entry
     });
   };
 
@@ -395,6 +400,22 @@ export default function JournalManager() {
             </label>
           </div>
 
+          {/* New: Created At input */}
+          <div className="mb-4">
+            <label className="block text-xs uppercase tracking-wider text-[#6b6b6b] mb-1">Created At</label>
+            <input
+              type="datetime-local"
+              value={form.created_at ? new Date(form.created_at).toISOString().slice(0, 16) : ''}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  created_at: e.target.value ? new Date(e.target.value).toISOString() : '',
+                })
+              }
+              className="w-full border-b border-[#d0d0d0] py-1 focus:outline-none focus:border-[#1a1a1a]"
+            />
+          </div>
+
           <div className="mb-4">
             <label className="block text-xs uppercase tracking-wider text-[#6b6b6b] mb-1">Cover Image</label>
             {form.cover_image ? (
@@ -469,6 +490,7 @@ export default function JournalManager() {
                 <th className="py-2 text-sm font-light uppercase tracking-wider">Categories</th>
                 <th className="py-2 text-sm font-light uppercase tracking-wider">Published</th>
                 <th className="py-2 text-sm font-light uppercase tracking-wider">Images</th>
+                <th className="py-2 text-sm font-light uppercase tracking-wider">Created</th> {/* new column */}
                 <th className="py-2 text-sm font-light uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
@@ -506,6 +528,9 @@ export default function JournalManager() {
                         <span className="text-xs text-[#6b6b6b]">+{entry.images.length}</span>
                       )}
                     </div>
+                  </td>
+                  <td className="py-3 text-sm">
+                    {entry.created_at ? new Date(entry.created_at).toLocaleDateString() : '-'}
                   </td>
                   <td className="py-3">
                     <div className="flex gap-2">

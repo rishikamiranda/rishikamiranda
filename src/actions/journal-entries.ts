@@ -132,14 +132,22 @@ type JournalEntryInput = {
   tags?: string[] | null;
   linkedin_link_url?: string | null;
   featured?: boolean;
+  created_at?: string; // new optional field
 };
 
 export async function createJournalEntry(data: JournalEntryInput) {
   try {
     const supabase = await createClient();
+
+    // Prepare payload: only include created_at if it has a value
+    const payload: any = { ...data };
+    if (payload.created_at === undefined || payload.created_at === '') {
+      delete payload.created_at; // let DB use default
+    }
+
     const { data: result, error } = await supabase
       .from('journal_entries')
-      .insert([data])
+      .insert([payload])
       .select()
       .single();
 
@@ -159,9 +167,16 @@ export async function createJournalEntry(data: JournalEntryInput) {
 export async function updateJournalEntry(id: string, data: Partial<JournalEntryInput>) {
   try {
     const supabase = await createClient();
+
+    // Prepare payload: only include created_at if it has a value
+    const payload: any = { ...data };
+    if (payload.created_at === undefined || payload.created_at === '') {
+      delete payload.created_at; // leave existing value unchanged
+    }
+
     const { data: result, error } = await supabase
       .from('journal_entries')
-      .update(data)
+      .update(payload)
       .eq('id', id)
       .select()
       .single();

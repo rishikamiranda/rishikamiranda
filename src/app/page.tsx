@@ -146,7 +146,7 @@ Resources
         {recentLists.length === 0 ? (
           <p className="text-[#6b6b6b]">No lists available yet.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8">
             {recentLists.map((list: List) => (
               <Link
                 key={list.id}
